@@ -12,7 +12,7 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('team_users', function (Blueprint $table) {
             $table->id();
             $table->string('google_id')->nullable();
             $table->string('github_id')->nullable();
@@ -33,6 +33,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('team_users');
     }
 };
