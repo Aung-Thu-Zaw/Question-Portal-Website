@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\PostResource;
-use App\Models\Post;
+use App\Models\TeamUser;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class PostController extends Controller
+class TeamUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::all());
+        //
     }
 
     /**
@@ -32,10 +32,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\TeamUser  $teamUser
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(TeamUser $teamUser)
     {
         //
     }
@@ -44,10 +44,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\TeamUser  $teamUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, TeamUser $teamUser)
     {
         //
     }
@@ -55,10 +55,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\TeamUser  $teamUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(TeamUser $teamUser)
     {
         //
     }
