@@ -1,0 +1,168 @@
+<template>
+  <!-- Question Card -->
+  <div
+    class="
+      flex flex-col
+      items-start
+      justify-between
+      shadow-lg
+      bg-light
+      p-5
+      border-2 border-gray-200
+      space-y-5
+      rounded-md
+    "
+  >
+    <div class="relative w-full">
+      <div class="flex items-center justify-between w-full">
+        <a href="#" class="text-blue-500 hover:underline">
+          <h1 class="text-xl md:text-2xl">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus,
+            odio.
+          </h1>
+        </a>
+        <span
+          class="
+            flex
+            items-center
+            justify-center
+            w-8
+            h-7
+            rounded-full
+            hover:text-gray-500 hover:cursor-pointer
+            transition-all
+          "
+          @click="isHiddenOptionBox = !isHiddenOptionBox"
+        >
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </span>
+      </div>
+
+      <div
+        class="
+          absolute
+          top-12
+          right-0
+          flex-col
+          items-start
+          justify-between
+          border
+          shadow
+          bg-white
+          rounded-md
+        "
+        :class="toggleOptionBox"
+      >
+        <div
+          class="py-2 px-4 w-full hover:bg-gray-400 transition-all border-b-2"
+        >
+          <i class="fa-solid fa-share mr-3"></i>
+          <span> Share </span>
+        </div>
+        <div class="py-2 px-4 w-full hover:bg-gray-400 transition-all">
+          <i class="fa-solid fa-bookmark mr-3"></i>
+          <span> Save To Bookmark </span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center flex-wrap w-full">
+      <a
+        href="#"
+        class="
+          bg-slate-500
+          text-white
+          px-5
+          py-1
+          text-sm text-bold
+          rounded-sm
+          mr-2
+        "
+      >
+        HTML
+      </a>
+      <a
+        href="#"
+        class="
+          bg-slate-500
+          text-white
+          px-5
+          py-1
+          text-sm text-bold
+          rounded-sm
+          mr-2
+        "
+      >
+        Css
+      </a>
+      <a
+        href="#"
+        class="
+          bg-slate-500
+          text-white
+          px-5
+          py-1
+          text-sm text-bold
+          rounded-sm
+          mr-2
+        "
+      >
+        Javascript
+      </a>
+    </div>
+    <div
+      class="
+        flex
+        items-center
+        flex-wrap
+        justify-between
+        w-full
+        space-y-3
+        md:space-y-0
+      "
+    >
+      <div class="flex items-center justify-center space-x-10">
+        <span class="font-bold text-gray-600">3 Likes</span>
+        <span class="font-bold text-gray-600">2 Answers</span>
+        <span class="font-bold text-gray-600">10 Views</span>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="flex items-center mr-2">
+          <img
+            src="https://media.istockphoto.com/id/1176489653/fr/photo/belle-femme-noire-%C3%A9tonn%C3%A9e.jpg?s=170667a&w=0&k=20&c=0Gbbr4RSXCrOVYgSBc2wJFeTO9O5z-qcxL2S5DsgMHo="
+            alt=""
+            class="w-8 h-8 rounded-full object-cover object-center mr-3"
+          />
+          <a href="#" class="font-bold text-blue-500 hover:underline">
+            Aung Thu Zaw
+          </a>
+        </div>
+        <span class="text-gray-500 mr-2">asked</span>
+        <span>3 minutes ago</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isHiddenOptionBox: true,
+    };
+  },
+
+  computed: {
+    toggleOptionBox() {
+      return {
+        hidden: this.isHiddenOptionBox == true,
+        flex: this.isHiddenOptionBox == false,
+      };
+    },
+  },
+
+  methods: {},
+};
+</script>
+
+<style>
+</style>

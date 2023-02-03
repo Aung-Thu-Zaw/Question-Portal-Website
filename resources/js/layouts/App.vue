@@ -1,11 +1,15 @@
 <template>
-  <h1 class="text-red-700 text-5xl">This is Vue Page</h1>
+  <Navbar></Navbar>
   <router-view />
 </template>
 
-<script lang="ts">
-export default {};
+<script>
+import Navbar from "../components/Navbar.vue";
+export default {
+  components: { Navbar },
+};
 </script>
 
 <style>
+
 </style>
