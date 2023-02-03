@@ -32,7 +32,7 @@
             hover:text-gray-500 hover:cursor-pointer
             transition-all
           "
-          @click="isHiddenOptionBox = !isHiddenOptionBox"
+          @click="isMenuBoxHidden = !isMenuBoxHidden"
         >
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </span>
@@ -51,7 +51,7 @@
           bg-white
           rounded-md
         "
-        :class="toggleOptionBox"
+        :class="toggleMenuBox"
       >
         <div
           class="py-2 px-4 w-full hover:bg-gray-400 transition-all border-b-2"
@@ -144,23 +144,21 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { computed } from "@vue/runtime-core";
 export default {
-  data() {
-    return {
-      isHiddenOptionBox: true,
-    };
-  },
+  setup() {
+    const isMenuBoxHidden = ref(true);
 
-  computed: {
-    toggleOptionBox() {
+    const toggleMenuBox = computed(() => {
       return {
-        hidden: this.isHiddenOptionBox == true,
-        flex: this.isHiddenOptionBox == false,
+        hidden: isMenuBoxHidden.value == true,
+        flex: isMenuBoxHidden.value == false,
       };
-    },
-  },
+    });
 
-  methods: {},
+    return { isMenuBoxHidden, toggleMenuBox };
+  },
 };
 </script>
 

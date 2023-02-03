@@ -23,7 +23,7 @@
           @click="isMobileMenuClosed = !isMobileMenuClosed"
         >
           <button
-            @click="isCloseButton = !isCloseButton"
+            @click="isButtonClosed = !isButtonClosed"
             type="button"
             class="z-40 block hamburger md:hidden focus:outline-none"
             :class="toggleHamburgerButton"
@@ -78,7 +78,7 @@
             hover:cursor-pointer hover:bg-gray-600
             transition-all
           "
-          @click="isHiddenSearchBox = !isHiddenSearchBox"
+          @click="isSearchBoxHidden = !isSearchBoxHidden"
         >
           <i
             class="
@@ -105,7 +105,7 @@
             hover:bg-gray-600 hover:cursor-pointer
             transition-all
           "
-          @click="isHiddenNotificationBox = !isHiddenNotificationBox"
+          @click="isNotificationBoxHidden = !isNotificationBoxHidden"
         >
           <i class="fa-solid fa-bell text-gray-700 group-hover:text-white"></i>
           <span
@@ -123,7 +123,7 @@
           >
         </div>
         <!-- Profile Button -->
-        <div @click="isHiddenProfileBox = !isHiddenProfileBox">
+        <div @click="isProfileBoxHidden = !isProfileBoxHidden">
           <img
             src="https://media.istockphoto.com/id/1176489653/fr/photo/belle-femme-noire-%C3%A9tonn%C3%A9e.jpg?s=170667a&w=0&k=20&c=0Gbbr4RSXCrOVYgSBc2wJFeTO9O5z-qcxL2S5DsgMHo="
             alt=""
@@ -176,7 +176,7 @@
             transition-all
             duration-100
           "
-          @click="isHiddenNotificationBox = !isHiddenNotificationBox"
+          @click="isNotificationBoxHidden = !isNotificationBoxHidden"
         >
           <i class="fa-solid fa-xmark"></i>
         </span>
@@ -376,51 +376,66 @@
 <script>
 import SingleYourQuestionGroupCard from "./SingleYourQuestionGroupCard.vue";
 import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
+import { ref } from "@vue/reactivity";
+import { computed } from "@vue/runtime-core";
 export default {
   components: {
     SingleYourQuestionGroupCard,
     SingleYourDiscussionGroupCard,
   },
-  data() {
+
+  setup() {
+    const isNotificationBoxHidden = ref(true);
+    const isProfileBoxHidden = ref(true);
+    const isSearchBoxHidden = ref(true);
+    const isMobileMenuHidden = ref(true);
+    const isButtonClosed = ref(false);
+    const isMobileMenuClosed = ref(true);
+
+    const toggleNotificationBox = computed(() => {
+      return {
+        hidden: isNotificationBoxHidden.value,
+      };
+    });
+
+    const toggleProfileBox = computed(() => {
+      return {
+        hidden: isProfileBoxHidden.value,
+      };
+    });
+
+    const toggleMobileSearchInput = computed(() => {
+      return {
+        hidden: isSearchBoxHidden.value,
+      };
+    });
+
+    const toggleHamburgerButton = computed(() => {
+      return {
+        open: isButtonClosed.value,
+      };
+    });
+
+    const toggleMobileMenu = computed(() => {
+      return {
+        hidden: isMobileMenuClosed.value,
+      };
+    });
+
     return {
-      isHiddenNotificationBox: true,
-      isHiddenProfileBox: true,
-      isHiddenSearchBox: true,
-      isHiddenMobileMenu: true,
-      isCloseButton: false,
-      isMobileMenuClosed: true,
+      isNotificationBoxHidden,
+      isProfileBoxHidden,
+      isSearchBoxHidden,
+      isMobileMenuHidden,
+      isButtonClosed,
+      isMobileMenuClosed,
+      toggleNotificationBox,
+      toggleProfileBox,
+      toggleMobileSearchInput,
+      toggleHamburgerButton,
+      toggleMobileMenu,
     };
   },
-
-  computed: {
-    toggleNotificationBox() {
-      return {
-        hidden: this.isHiddenNotificationBox,
-      };
-    },
-    toggleProfileBox() {
-      return {
-        hidden: this.isHiddenProfileBox,
-      };
-    },
-    toggleMobileSearchInput() {
-      return {
-        hidden: this.isHiddenSearchBox,
-      };
-    },
-    toggleHamburgerButton() {
-      return {
-        open: this.isCloseButton,
-      };
-    },
-    toggleMobileMenu() {
-      return {
-        hidden: this.isMobileMenuClosed,
-      };
-    },
-  },
-
-  methods: {},
 };
 </script>
 
