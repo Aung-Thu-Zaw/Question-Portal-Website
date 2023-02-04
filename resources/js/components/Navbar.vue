@@ -185,11 +185,7 @@
       <!-- Loop This -->
       <div class="border-b-2">
         <div class="flex items-start p-2 w-full">
-          <img
-            src="./images/logo-dark.png"
-            alt=""
-            class="w-10 rounded-full mr-2"
-          />
+          <img src="" alt="" class="w-10 rounded-full mr-2" />
           <div>
             <div>
               <span class="font-bold text-sm text-gray-800 mr-1"

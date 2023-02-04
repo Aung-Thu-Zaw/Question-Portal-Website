@@ -1,6 +1,8 @@
 <template>
   <!-- Question Card -->
   <div
+    v-for="question in questions"
+    :key="question.id"
     class="
       flex flex-col
       items-start
@@ -17,8 +19,7 @@
       <div class="flex items-center justify-between w-full">
         <a href="#" class="text-blue-500 hover:underline">
           <h1 class="text-xl md:text-2xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus,
-            odio.
+            {{ question.question }}
           </h1>
         </a>
         <span
@@ -59,6 +60,7 @@
           <i class="fa-solid fa-share mr-3"></i>
           <span> Share </span>
         </div>
+
         <div class="py-2 px-4 w-full hover:bg-gray-400 transition-all">
           <i class="fa-solid fa-bookmark mr-3"></i>
           <span> Save To Bookmark </span>
@@ -145,9 +147,12 @@
 
 <script>
 import { ref } from "@vue/reactivity";
-import { computed } from "@vue/runtime-core";
+import { computed, onMounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
+
     const isMenuBoxHidden = ref(true);
 
     const toggleMenuBox = computed(() => {
@@ -157,7 +162,12 @@ export default {
       };
     });
 
-    return { isMenuBoxHidden, toggleMenuBox };
+    return {
+      isMenuBoxHidden,
+      toggleMenuBox,
+      questions: computed(() => store.getters.getQuestions),
+      fetchQuestions: store.dispatch("fetchQuestions"),
+    };
   },
 };
 </script>
