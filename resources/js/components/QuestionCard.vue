@@ -1,7 +1,7 @@
 <template>
   <!-- Question Card -->
   <div
-    v-for="question in questions"
+    v-for="question in questions.data"
     :key="question.id"
     class="
       flex flex-col
@@ -139,17 +139,31 @@
           </a>
         </div>
         <span class="text-gray-500 mr-2">asked</span>
-        <span>3 minutes ago</span>
+        <span>{{ question.created_time }}</span>
       </div>
     </div>
+  </div>
+  <div class="flex flex-wrap items-center justify-center">
+    <TailwindPagination
+      class="flex items-center"
+      active-classes="bg-blue-50 border-blue-500 text-blue-600"
+      item-classes="bg-white text-gray-500 border-gray-300 hover:bg-gray-50"
+      :data="questions"
+      :limit="2"
+      @pagination-change-page="fetchQuestions"
+    />
   </div>
 </template>
 
 <script>
+import { TailwindPagination } from "laravel-vue-pagination";
 import { ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
+  components: {
+    TailwindPagination,
+  },
   setup() {
     const store = useStore();
 
@@ -162,11 +176,15 @@ export default {
       };
     });
 
+    const fetchQuestions = onMounted(async (page) => {
+      await store.dispatch("fetchQuestions", page);
+    });
+
     return {
       isMenuBoxHidden,
       toggleMenuBox,
       questions: computed(() => store.getters.getQuestions),
-      fetchQuestions: store.dispatch("fetchQuestions"),
+      fetchQuestions,
     };
   },
 };

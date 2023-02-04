@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { useRoute } from "vue-router";
 import FilterButton from "../../components/FilterButton.vue";
 import SideNavbar from "../../components/SideNavbar.vue";
 import DiscussionGroupsCardBox from "../../components/DiscussionGroupsCardBox.vue";
@@ -53,6 +54,10 @@ export default {
     DiscussionGroupsCardBox,
     QuestionGroupsCardBox,
     QuestionCard,
+  },
+
+  setup() {
+    return {};
   },
 };
 </script>

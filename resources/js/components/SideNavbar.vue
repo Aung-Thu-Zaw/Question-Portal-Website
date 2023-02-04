@@ -15,6 +15,7 @@
         hover:bg-dark hover:text-white
         transition-all
       "
+      :class="{ 'bg-dark text-white': route.path === '/' }"
     >
       <i class="fa-solid fa-house mr-3"></i>
       Home
@@ -86,12 +87,18 @@
 </template>
 
 <script>
+import { useRoute } from "vue-router";
 import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
 import SingleYourQuestionGroupCard from "./SingleYourQuestionGroupCard.vue";
 export default {
   components: {
     SingleYourDiscussionGroupCard,
     SingleYourQuestionGroupCard,
+  },
+
+  setup() {
+    const route = useRoute();
+    return { route };
   },
 };
 </script>
