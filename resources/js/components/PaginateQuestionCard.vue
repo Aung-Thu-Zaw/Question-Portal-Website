@@ -20,7 +20,10 @@
         <a href="#" class="text-blue-500 hover:underline">
           <h1 class="text-xl md:text-2xl">
             <router-link
-              :to="{ name: 'question.details', params: { id: question.id } }"
+              :to="{
+                name: 'question.details',
+                params: { slug: question.slug },
+              }"
             >
               {{ question.question }}
             </router-link>
@@ -170,8 +173,6 @@ export default {
   },
   setup() {
     const store = useStore();
-
-    console.log(store.state.questions);
 
     const isMenuBoxHidden = ref(true);
 

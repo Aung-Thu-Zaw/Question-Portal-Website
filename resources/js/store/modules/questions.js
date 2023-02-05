@@ -4,6 +4,7 @@ export default {
     state: {
         questions: [],
         paginateQuestions: [],
+        singleSpecificQuestion: [],
     },
     getters: {
         getQuestions(state) {
@@ -12,9 +13,9 @@ export default {
         getPaginateQuestions(state) {
             return state.paginateQuestions;
         },
-        // getQuestionById: (state) => (id) => {
-        //     return state.questions.find((question) => question.id === id);
-        // },
+        getSingleSpecificQuestion(state) {
+            return state.singleSpecificQuestion;
+        },
     },
     mutations: {
         setQuestions(state, questions) {
@@ -22,6 +23,9 @@ export default {
         },
         setPaginateQuestions(state, paginateQuestions) {
             state.paginateQuestions = paginateQuestions;
+        },
+        setSingleSpecificQuestion(state, singleSpecificQuestion) {
+            state.singleSpecificQuestion = singleSpecificQuestion;
         },
     },
 
@@ -43,9 +47,18 @@ export default {
 
             const paginateQuestionData = response.data;
 
-            console.log(paginateQuestionData);
-
             commit("setPaginateQuestions", paginateQuestionData);
+        },
+        async fetchSingleSpecificQuestion({ commit }, slug) {
+            const response = await axios.get(
+                `http://localhost:8000/api/questions/${slug}`
+            );
+
+            const singleSpecificQuestionData = response.data.data;
+
+            console.log(singleSpecificQuestionData);
+
+            commit("setSingleSpecificQuestion", singleSpecificQuestionData);
         },
     },
 };

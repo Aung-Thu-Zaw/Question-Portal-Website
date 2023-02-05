@@ -18,6 +18,7 @@ class QuestionFactory extends Factory
     {
         return [
             "question"=>$this->faker->sentence(),
+            "slug"=>$this->faker->slug(),
             "detail"=>$this->faker->text(),
             "view"=>"0"
         ];

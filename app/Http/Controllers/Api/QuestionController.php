@@ -22,8 +22,10 @@ class QuestionController extends Controller
 
     public function show(Question $question)
     {
-        //
+        return new QuestionResource($question);
     }
+
+
 
     public function update(Request $request, Question $question)
     {
