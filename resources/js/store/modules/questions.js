@@ -2,11 +2,18 @@ import axios from "axios";
 
 export default {
     state: {
-        questions: [],
+        questions: [
+            { id: 1, question: "haha", details: "baklfjasdkfjfklj" },
+            { id: 2, question: "haha", details: "baklfjasdkfjfklj" },
+            { id: 3, question: "haha", details: "baklfjasdkfjfklj" },
+        ],
     },
     getters: {
         getQuestions(state) {
             return state.questions;
+        },
+        getQuestionById: (state) => (id) => {
+            return state.questions.find((question) => question.id === id);
         },
     },
     mutations: {
@@ -27,12 +34,3 @@ export default {
         },
     },
 };
-
-// const laravelData = ref({});
-
-// const getResults = async (page = 1) => {
-//     const response = await fetch(`https://example.com/results?page=${page}`);
-//     laravelData.value = await response.json();
-// };
-
-// getResults();

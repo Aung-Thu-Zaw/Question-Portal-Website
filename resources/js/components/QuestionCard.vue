@@ -19,7 +19,11 @@
       <div class="flex items-center justify-between w-full">
         <a href="#" class="text-blue-500 hover:underline">
           <h1 class="text-xl md:text-2xl">
-            {{ question.question }}
+            <router-link
+              :to="{ name: 'post.details', params: { id: question.id } }"
+            >
+              {{ question.question }}
+            </router-link>
           </h1>
         </a>
         <span
@@ -166,6 +170,8 @@ export default {
   },
   setup() {
     const store = useStore();
+
+    console.log(store.state.questions);
 
     const isMenuBoxHidden = ref(true);
 

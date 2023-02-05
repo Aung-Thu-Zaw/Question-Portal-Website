@@ -18,7 +18,7 @@ module.exports = {
                 brand: "#8EC1D6",
                 dark: "#3D4B5F",
                 mid: "#CBD5E1",
-                light: "##F8FAFC",
+                light: "#F8FAFC",
             },
             fontFamily: {
                 libre: ["Libre Baskerville", "serif"],
