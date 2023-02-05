@@ -1,30 +1,36 @@
 import { createRouter, createWebHistory } from "vue-router";
-import PostIndex from "../views/posts/Index.vue";
-import PostCreate from "../views/posts/Create.vue";
-import PostEdit from "../views/posts/Edit.vue";
-import PostDetails from "../views/posts/Details.vue";
+import Home from "../views/Home.vue";
+import QuestionIndex from "../views/questions/Index.vue";
+import QuestionCreate from "../views/questions/Create.vue";
+import QuestionEdit from "../views/questions/Edit.vue";
+import QuestionDetails from "../views/questions/Details.vue";
 
 const routes = [
     {
         path: "/",
         name: "home",
-        component: PostIndex,
+        component: Home,
     },
     {
-        path: "/questions/ask",
-        name: "post.create",
-        component: PostCreate,
-    },
-    {
-        path: "/questions/:id/edit",
-        name: "post.edit",
-        component: PostEdit,
+        path: "/questions",
+        name: "question.index",
+        component: QuestionIndex,
     },
     {
         path: "/questions/:id",
-        name: "post.details",
-        component: PostDetails,
+        name: "question.details",
+        component: QuestionDetails,
         props: true,
+    },
+    {
+        path: "/questions/ask",
+        name: "question.create",
+        component: QuestionCreate,
+    },
+    {
+        path: "/questions/:id/edit",
+        name: "question.edit",
+        component: QuestionEdit,
     },
 ];
 

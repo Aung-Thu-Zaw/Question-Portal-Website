@@ -33,7 +33,9 @@
             <span class="hamburger-bottom border-2"></span>
           </button>
         </div>
-        <h1 class="text-2xl text-gray-900 font-bold mr-5">Questions Portal</h1>
+        <h1 class="text-2xl text-gray-900 font-bold mr-5">
+          <router-link to="/"> Questions Portal </router-link>
+        </h1>
       </div>
 
       <!-- Search Form -->

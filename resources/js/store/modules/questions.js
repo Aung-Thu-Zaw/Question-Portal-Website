@@ -2,35 +2,47 @@ import axios from "axios";
 
 export default {
     state: {
-        questions: [
-            { id: 1, question: "haha", details: "baklfjasdkfjfklj" },
-            { id: 2, question: "haha", details: "baklfjasdkfjfklj" },
-            { id: 3, question: "haha", details: "baklfjasdkfjfklj" },
-        ],
+        questions: [],
+        // paginateQuestions: [],
     },
     getters: {
         getQuestions(state) {
             return state.questions;
         },
-        getQuestionById: (state) => (id) => {
-            return state.questions.find((question) => question.id === id);
-        },
+        // getQuestionById: (state) => (id) => {
+        //     return state.questions.find((question) => question.id === id);
+        // },
     },
     mutations: {
         setQuestions(state, questions) {
             state.questions = questions;
         },
+        // setPaginateQuestions(state, paginateQuestions) {
+        //     state.paginateQuestions = paginateQuestions;
+        // },
     },
 
     actions: {
-        async fetchQuestions({ commit }, page = 1) {
+        async fetchAllQuestions({ commit }) {
             const response = await axios.get(
-                `http://localhost:8000/api/questions?page=${page}`
+                "http://localhost:8000/api/latest-questions"
             );
 
-            const questionData = response.data;
+            const questionData = response.data.data;
+
+            console.log("question data", questionData);
 
             commit("setQuestions", questionData);
         },
+
+        // async fetchQuestionsWithPagination({ commit }, page = 1) {
+        //     const response = await axios.get(
+        //         `http://localhost:8000/api/questions?page=${page}`
+        //     );
+
+        //     const paginateQuestionData = response.data;
+
+        //     commit("setPaginateQuestions", paginateQuestionData);
+        // },
     },
 };

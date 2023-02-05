@@ -16,7 +16,7 @@ class HomeQuestionController extends Controller
      */
     public function index()
     {
-        return QuestionResource::collection(Question::orderBy("id", "desc")->get());
+        return QuestionResource::collection(Question::orderBy("id", "desc")->take(20)->get());
     }
 
     /**

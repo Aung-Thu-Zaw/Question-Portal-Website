@@ -12,7 +12,7 @@
         rounded-md
         shadow-md
         bg-white
-        hover:bg-dark hover:text-white
+        hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "
       :class="{ 'bg-dark text-white': route.path === '/' }"
@@ -32,9 +32,10 @@
         border-b-2
         px-5
         text-gray-700
-        hover:bg-dark hover:text-white
+        hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "
+      :class="{ 'bg-dark text-white': route.path === '/questions' }"
     >
       <i class="fa-solid fa-question mr-3"></i>
       <span>Questions</span>
@@ -46,9 +47,10 @@
         border-b-2
         px-5
         text-gray-700
-        hover:bg-dark hover:text-white
+        hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "
+      :class="{ 'bg-dark text-white': route.path === '/tags' }"
     >
       <i class="fa-solid fa-tag mr-3"></i>
       <span>Tags</span>
@@ -60,9 +62,10 @@
         border-b-2
         px-5
         text-gray-700
-        hover:bg-dark hover:text-white
+        hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "
+      :class="{ 'bg-dark text-white': route.path === '/users' }"
     >
       <i class="fa-solid fa-users mr-3"></i>
       <span>Users</span>
