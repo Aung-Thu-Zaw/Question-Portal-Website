@@ -154,7 +154,7 @@
       item-classes="bg-white text-gray-500 border-gray-300 hover:bg-gray-50"
       :data="questions"
       :limit="2"
-      @pagination-change-page="fetchQuestions"
+      @pagination-change-page="fetchQuestionsWithPagination"
     />
   </div>
 </template>
@@ -182,15 +182,15 @@ export default {
       };
     });
 
-    const fetchQuestions = onMounted(async (page) => {
-      await store.dispatch("fetchQuestions", page);
+    const fetchQuestionsWithPagination = onMounted(async (page) => {
+      await store.dispatch("fetchQuestionsWithPagination", page);
     });
 
     return {
       isMenuBoxHidden,
       toggleMenuBox,
-      questions: computed(() => store.getters.getQuestions),
-      fetchQuestions,
+      questions: computed(() => store.getters.getPaginateQuestions),
+      fetchQuestionsWithPagination,
     };
   },
 };

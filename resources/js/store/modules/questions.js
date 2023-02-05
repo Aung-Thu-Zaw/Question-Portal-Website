@@ -3,11 +3,14 @@ import axios from "axios";
 export default {
     state: {
         questions: [],
-        // paginateQuestions: [],
+        paginateQuestions: [],
     },
     getters: {
         getQuestions(state) {
             return state.questions;
+        },
+        getPaginateQuestions(state) {
+            return state.paginateQuestions;
         },
         // getQuestionById: (state) => (id) => {
         //     return state.questions.find((question) => question.id === id);
@@ -17,9 +20,9 @@ export default {
         setQuestions(state, questions) {
             state.questions = questions;
         },
-        // setPaginateQuestions(state, paginateQuestions) {
-        //     state.paginateQuestions = paginateQuestions;
-        // },
+        setPaginateQuestions(state, paginateQuestions) {
+            state.paginateQuestions = paginateQuestions;
+        },
     },
 
     actions: {
@@ -30,19 +33,19 @@ export default {
 
             const questionData = response.data.data;
 
-            console.log("question data", questionData);
-
             commit("setQuestions", questionData);
         },
 
-        // async fetchQuestionsWithPagination({ commit }, page = 1) {
-        //     const response = await axios.get(
-        //         `http://localhost:8000/api/questions?page=${page}`
-        //     );
+        async fetchQuestionsWithPagination({ commit }, page = 1) {
+            const response = await axios.get(
+                `http://localhost:8000/api/questions?page=${page}`
+            );
 
-        //     const paginateQuestionData = response.data;
+            const paginateQuestionData = response.data;
 
-        //     commit("setPaginateQuestions", paginateQuestionData);
-        // },
+            console.log(paginateQuestionData);
+
+            commit("setPaginateQuestions", paginateQuestionData);
+        },
     },
 };

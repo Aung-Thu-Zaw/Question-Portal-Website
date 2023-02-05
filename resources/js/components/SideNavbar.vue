@@ -1,7 +1,7 @@
 <template>
   <div class="py-10 w-full">
-    <a
-      href="#"
+    <router-link
+      to="/"
       class="
         block
         text-xl
@@ -19,27 +19,30 @@
     >
       <i class="fa-solid fa-house mr-3"></i>
       Home
-    </a>
+    </router-link>
   </div>
 
   <div class="py-1 mb-3">
     <h1 class="text-3xl text-gray-400 tracking-wide mb-5 px-2">Public</h1>
 
-    <div
-      class="
-        text-md
-        py-3
-        border-b-2
-        px-5
-        text-gray-700
-        hover:bg-dark hover:opacity-75 hover:text-white
-        transition-all
-      "
-      :class="{ 'bg-dark text-white': route.path === '/questions' }"
-    >
-      <i class="fa-solid fa-question mr-3"></i>
-      <span>Questions</span>
-    </div>
+    <router-link :to="{ name: 'question.index' }">
+      <div
+        class="
+          text-md
+          py-3
+          border-b-2
+          px-5
+          text-gray-700
+          hover:bg-dark hover:opacity-75 hover:text-white
+          transition-all
+        "
+        :class="{ 'bg-dark text-white': route.path === '/questions' }"
+      >
+        <i class="fa-solid fa-question mr-3"></i>
+        <span>Questions</span>
+      </div>
+    </router-link>
+
     <div
       class="
         text-md
@@ -55,6 +58,7 @@
       <i class="fa-solid fa-tag mr-3"></i>
       <span>Tags</span>
     </div>
+
     <div
       class="
         text-md
