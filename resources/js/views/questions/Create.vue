@@ -23,15 +23,60 @@
       </div>
       <form action="" method="POST">
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
-          <h3 class="text-2xl font-semibold">Title</h3>
+          <h3 class="text-2xl font-semibold">Title *</h3>
           <p class="my-3">
             Be specific and imagine you're asking a question to another person.
           </p>
           <input
             type="text"
-            class="border-2 p-3 w-full outline-none rounded-md"
+            class="
+              border-2
+              p-3
+              w-full
+              outline-none
+              rounded-md
+              focus:border-blue-400 focus:shadow-inner
+              transition-all
+            "
             placeholder="Write Your Question?"
           />
+        </div>
+        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
+          <h3 class="text-2xl font-semibold">Detail *</h3>
+          <p class="my-3">Write it down your techanical problem.</p>
+
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            class="
+              border-2
+              p-3
+              w-full
+              outline-none
+              rounded-md
+              focus:border-blue-400 focus:shadow-inner
+              transition-all
+            "
+            placeholder="Write Your Problem Detail"
+          ></textarea>
+        </div>
+        <div class="my-4 flex items-center justify-end">
+          <button
+            class="
+              py-3
+              px-4
+              border
+              bg-blue-500
+              hover:bg-blue-700 hover:text-white
+              transition-all
+              rounded-lg
+              font-bold
+            "
+          >
+            Ask Question
+          </button>
         </div>
       </form>
     </div>

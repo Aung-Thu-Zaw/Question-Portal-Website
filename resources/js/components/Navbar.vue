@@ -1,6 +1,6 @@
 <template>
   <!-- Navbar -->
-  <nav id="navbar" class="relative font-playfair">
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-10 font-playfair">
     <div
       class="
         flex
