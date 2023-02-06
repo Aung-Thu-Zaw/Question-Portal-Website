@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex w-full min-h-screen bg-light mt-16">
+  <div class="relative flex w-full min-h-screen bg-light mt-20">
     <!-- Left Side -->
     <LeftSide />
 
@@ -8,7 +8,7 @@
       <div class="flex flex-wrap items-center justify-between p-8">
         <h1 class="text-3xl md:text-4xl">All Questions</h1>
         <router-link
-          :to="{ name: 'question.create' }"
+          :to="{ name: 'questions.create' }"
           class="
             border
             px-3
@@ -25,7 +25,7 @@
         </router-link>
       </div>
 
-      <FilterButton />
+      <QuestionFilterButton />
 
       <PaginateQuestionCard />
     </div>
@@ -38,13 +38,13 @@
 <script>
 import RightSide from "../../components/RightSide.vue";
 import LeftSide from "../../components/LeftSide.vue";
-import FilterButton from "../../components/FilterButton.vue";
+import QuestionFilterButton from "../../components/QuestionFilterButton.vue";
 import PaginateQuestionCard from "../../components/PaginateQuestionCard.vue";
 export default {
   components: {
     RightSide,
     LeftSide,
-    FilterButton,
+    QuestionFilterButton,
     PaginateQuestionCard,
   },
 

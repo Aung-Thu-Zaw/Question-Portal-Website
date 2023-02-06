@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="relative flex w-full min-h-screen bg-light border border-green-800"
-  >
+  <div class="relative flex w-full min-h-screen bg-light mt-20">
     <!-- Left Side -->
     <LeftSide />
 
@@ -13,7 +11,7 @@
           {{ question.question }}
         </h1>
         <router-link
-          :to="{ name: 'question.create' }"
+          :to="{ name: 'questions.create' }"
           class="
             border
             px-3
@@ -42,7 +40,7 @@
         </span>
         <span class="text-sm mr-10">
           <span class="text-gray-400 mr-1">Viewed</span>
-          30 times
+          {{ question.view }} times
         </span>
       </div>
 

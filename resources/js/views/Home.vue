@@ -8,7 +8,7 @@
       <div class="flex flex-wrap items-center justify-between p-8">
         <h1 class="text-3xl md:text-4xl">Top Questions</h1>
         <router-link
-          :to="{ name: 'question.create' }"
+          :to="{ name: 'questions.create' }"
           class="
             border
             px-3
@@ -25,13 +25,13 @@
         </router-link>
       </div>
 
-      <FilterButton />
+      <QuestionFilterButton />
 
       <QuestionCard />
 
       <h3 class="text-center text-2xl text-gray-600">
         <router-link
-          :to="{ name: 'question.index' }"
+          :to="{ name: 'questions.index' }"
           class="
             text-blue-400
             hover:text-blue-600 hover:underline
@@ -52,13 +52,13 @@
   <script>
 import RightSide from "../components/RightSide.vue";
 import LeftSide from "../components/LeftSide.vue";
-import FilterButton from "../components/FilterButton.vue";
+import QuestionFilterButton from "../components/QuestionFilterButton.vue";
 import QuestionCard from "../components/QuestionCard.vue";
 export default {
   components: {
     RightSide,
     LeftSide,
-    FilterButton,
+    QuestionFilterButton,
     QuestionCard,
   },
 

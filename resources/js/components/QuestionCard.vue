@@ -21,7 +21,7 @@
           <h1 class="text-xl md:text-2xl">
             <router-link
               :to="{
-                name: 'question.details',
+                name: 'questions.details',
                 params: { slug: question.slug },
               }"
             >
@@ -132,7 +132,7 @@
       <div class="flex items-center justify-center space-x-10">
         <span class="font-bold text-gray-600">3 Likes</span>
         <span class="font-bold text-gray-600">2 Answers</span>
-        <span class="font-bold text-gray-600">10 Views</span>
+        <span class="font-bold text-gray-600">{{ question.view }} Views</span>
       </div>
       <div class="flex items-center justify-center">
         <div class="flex items-center mr-2">

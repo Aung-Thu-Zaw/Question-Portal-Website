@@ -20,7 +20,7 @@ class QuestionFactory extends Factory
             "question"=>$this->faker->sentence(),
             "slug"=>$this->faker->slug(),
             "detail"=>$this->faker->text(),
-            "view"=>"0"
+            "view"=>"3"
         ];
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 bg-light min-h-screen md:p-20">
+  <div class="p-5 bg-light min-h-screen md:p-20 mt-16">
     <div class="md:container md:mx-auto">
       <h1 class="text-3xl mb-10 font-bold">Ask a public question</h1>
 
