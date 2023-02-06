@@ -26,4 +26,4 @@ Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("
 
 Route::apiResource("/questions", QuestionController::class);
 
-// Route::apiResource("/tags", TagController::class);
+Route::apiResource("/tags", TagController::class);
