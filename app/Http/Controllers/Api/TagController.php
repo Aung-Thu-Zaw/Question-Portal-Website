@@ -16,7 +16,14 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags=Tag::search(request("search"))->paginate(40);
+        if (request("filter")=="newest") {
+            $tags=Tag::search(request("search"))->orderBy("id", "desc")->paginate(40);
+        } elseif (request("filter")=="oldest") {
+            $tags=Tag::search(request("search"))->orderBy("id", "asc")->paginate(40);
+        } elseif (request("filter")=="name") {
+            $tags=Tag::search(request("search"))->orderBy("name", "asc")->paginate(40);
+        }
+
         return TagResource::collection($tags);
     }
 

@@ -19,7 +19,7 @@
             type="text"
             name=""
             id=""
-            v-model="global_search"
+            v-model="globalSearch"
             class="w-full outline-none bg-transparent placeholder:text-gray-600"
             placeholder="Search..."
           />
@@ -28,10 +28,10 @@
       </form>
     </div>
     <div class="flex items-center justify-end mb-5">
-      <a
-        href="#"
+      <span
+        @click="filterTags('newest')"
         class="
-          text-lg text-dark
+          text-lg
           px-3
           py-1
           border-2 border-gray-600
@@ -40,13 +40,21 @@
           transition-all
           duration-150
         "
+        :class="{
+          'bg-dark text-white':
+            route.path === '/tags' && route.query.filter === 'newest',
+          'bg-dark text-white':
+            route.path === '/tags' &&
+            route.query.filter != 'oldest' &&
+            route.query.filter != 'name',
+        }"
       >
         Newest
-      </a>
-      <a
-        href="#"
+      </span>
+      <span
+        @click="filterTags('oldest')"
         class="
-          text-lg text-dark
+          text-lg
           px-3
           py-1
           border-r-2 border-t-2 border-b-2 border-gray-600
@@ -55,11 +63,14 @@
           transition-all
           duration-150
         "
+        :class="{
+          'bg-dark text-white':
+            route.path === '/tags' && route.query.filter === 'oldest',
+        }"
       >
         Oldest
-      </a>
-      <a
-        href="#"
+      </span>
+      <!-- <span
         class="
           text-lg text-dark
           px-3
@@ -72,11 +83,11 @@
         "
       >
         Popular
-      </a>
-      <a
-        href="#"
+      </span> -->
+      <span
+        @click="filterTags('name')"
         class="
-          text-lg text-dark
+          text-lg
           px-3
           py-1
           border-r-2 border-t-2 border-b-2 border-gray-600
@@ -85,31 +96,87 @@
           transition-all
           duration-150
         "
+        :class="{
+          'bg-dark text-white':
+            route.path === '/tags' && route.query.filter === 'name',
+        }"
       >
         Name
-      </a>
+      </span>
     </div>
   </div>
 </template>
 
-  <script>
+<script>
+import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { ref } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
+import { onMounted, onUnmounted, watch } from "@vue/runtime-core";
 export default {
   setup() {
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
     const page = ref("1");
-    const global_search = ref("");
+    const globalSearch = ref(route.query.search ? route.query.search : "");
 
-    watch(global_search, (current, previous) => {
+    watch(globalSearch, (current, previous) => {
       store.dispatch("fetchTagsWithPagination", {
         page: page.value,
-        global_search: global_search.value,
+        globalSearch: globalSearch.value,
+        filterBy: route.query.filter,
         current,
       });
+
+      if (route.query.filter) {
+        router.push({
+          path: "/tags",
+          query: {
+            search: globalSearch.value,
+            filter: route.query.filter,
+          },
+        });
+      } else {
+        router.push({
+          path: "/tags",
+          query: {
+            search: globalSearch.value,
+          },
+        });
+      }
     });
-    return { global_search };
+
+    const filterTags = (filterBy = "newest") => {
+      store.dispatch("fetchTagsWithPagination", {
+        page: page.value,
+        globalSearch: globalSearch.value,
+        filterBy,
+      });
+
+      if (route.query.search) {
+        router.push({
+          path: "/tags",
+          query: {
+            search: route.query.search,
+            filter: filterBy,
+          },
+        });
+      } else {
+        router.push({
+          path: "/tags",
+          query: {
+            filter: filterBy,
+          },
+        });
+      }
+    };
+
+    return {
+      route,
+      globalSearch,
+      filterTags,
+    };
   },
 };
 </script>

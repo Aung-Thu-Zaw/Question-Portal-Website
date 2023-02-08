@@ -34,6 +34,7 @@
             mb-3
           "
         >
+          {{ tag.id }}
           {{ tag.name }}
         </a>
         <p class="text-sm text-gray-600">
@@ -63,17 +64,21 @@
 import { TailwindPagination } from "laravel-vue-pagination";
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRoute, useRouter } from "vue-router";
 export default {
   components: {
     TailwindPagination,
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
 
     const fetchTagsWithPagination = onMounted(async (page = 1) => {
       await store.dispatch("fetchTagsWithPagination", {
         page,
-        global_search: "",
+        globalSearch: route.query.search ? route.query.search : "",
+        filterBy: route.query.filter ? route.query.filter : "newest",
       });
     });
 
