@@ -16,12 +16,14 @@ export default {
     },
 
     actions: {
-        async fetchTagsWithPagination({ commit }, page = 1) {
+        async fetchTagsWithPagination({ commit }, payload) {
             const response = await axios.get(
-                `http://localhost:8000/api/tags?page=${page}`
+                `http://localhost:8000/api/tags?page=${payload.page}&search=${payload.global_search}`
             );
 
             const paginateTagData = response.data;
+
+            console.log(paginateTagData);
 
             commit("setPaginateTags", paginateTagData);
         },

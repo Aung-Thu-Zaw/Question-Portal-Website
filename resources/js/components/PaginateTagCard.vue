@@ -70,8 +70,11 @@ export default {
   setup() {
     const store = useStore();
 
-    const fetchTagsWithPagination = onMounted(async (page) => {
-      await store.dispatch("fetchTagsWithPagination", page);
+    const fetchTagsWithPagination = onMounted(async (page = 1) => {
+      await store.dispatch("fetchTagsWithPagination", {
+        page,
+        global_search: "",
+      });
     });
 
     return {

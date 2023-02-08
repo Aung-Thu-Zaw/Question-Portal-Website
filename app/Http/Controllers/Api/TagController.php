@@ -16,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return TagResource::collection(Tag::paginate(40));
+        $tags=Tag::search(request("search"))->paginate(40);
+        return TagResource::collection($tags);
     }
 
     /**

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap items-center justify-between">
     <div class="mb-5">
-      <form action="">
+      <form method="GET">
         <div
           class="
             flex
@@ -19,6 +19,7 @@
             type="text"
             name=""
             id=""
+            v-model="global_search"
             class="w-full outline-none bg-transparent placeholder:text-gray-600"
             placeholder="Search..."
           />
@@ -92,7 +93,25 @@
 </template>
 
   <script>
-export default {};
+import { useStore } from "vuex";
+import { ref } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
+export default {
+  setup() {
+    const store = useStore();
+    const page = ref("1");
+    const global_search = ref("");
+
+    watch(global_search, (current, previous) => {
+      store.dispatch("fetchTagsWithPagination", {
+        page: page.value,
+        global_search: global_search.value,
+        current,
+      });
+    });
+    return { global_search };
+  },
+};
 </script>
 
   <style>

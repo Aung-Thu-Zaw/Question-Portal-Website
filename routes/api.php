@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("home");
 
-Route::apiResource("/questions", QuestionController::class);
 
-Route::apiResource("/tags", TagController::class);
+Route::apiResources([
+    'questions' => QuestionController::class,
+    'tags' => TagController::class,
+]);
