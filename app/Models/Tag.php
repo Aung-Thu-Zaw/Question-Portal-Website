@@ -20,7 +20,7 @@ class Tag extends Model
     {
         return [
             'name' => $this->name,
-            'description' => $this->description,
+            // 'description' => $this->description,
         ];
     }
 }
