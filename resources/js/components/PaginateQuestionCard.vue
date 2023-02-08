@@ -25,6 +25,7 @@
                 params: { slug: question.slug },
               }"
             >
+              {{ question.id }}
               {{ question.question }}
             </router-link>
           </h1>
@@ -183,8 +184,11 @@ export default {
       };
     });
 
-    const fetchQuestionsWithPagination = onMounted(async (page) => {
-      await store.dispatch("fetchQuestionsWithPagination", page);
+    const fetchQuestionsWithPagination = onMounted(async (page = 1) => {
+      await store.dispatch("fetchQuestionsWithPagination", {
+        page,
+        filterBy: "newest",
+      });
     });
 
     return {

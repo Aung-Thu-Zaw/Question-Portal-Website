@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center justify-end">
-    <a
-      href="#"
+    <span
+      @click="filterQuestions('newest')"
       class="
-        text-lg text-dark
+        text-lg
         px-3
         py-1
         border-2 border-gray-600
@@ -12,13 +12,23 @@
         transition-all
         duration-150
       "
+      :class="{
+        'bg-dark text-white':
+          route.path === '/questions' && route.query.filter === 'newest',
+        'bg-dark text-white':
+          route.path === '/questions' &&
+          route.query.filter != 'oldest' &&
+          route.query.filter != 'interesting' &&
+          route.query.filter != 'week' &&
+          route.query.filter != 'month',
+      }"
     >
       Newest
-    </a>
-    <a
-      href="#"
+    </span>
+    <span
+      @click="filterQuestions('oldest')"
       class="
-        text-lg text-dark
+        text-lg
         px-3
         py-1
         border-r-2 border-t-2 border-b-2 border-gray-600
@@ -27,13 +37,17 @@
         transition-all
         duration-150
       "
+      :class="{
+        'bg-dark text-white':
+          route.path === '/questions' && route.query.filter === 'oldest',
+      }"
     >
       Oldest
-    </a>
-    <a
-      href="#"
+    </span>
+    <span
+      @click="filterQuestions('interesting')"
       class="
-        text-lg text-dark
+        text-lg
         px-3
         py-1
         border-r-2 border-t-2 border-b-2 border-gray-600
@@ -42,13 +56,17 @@
         transition-all
         duration-150
       "
+      :class="{
+        'bg-dark text-white':
+          route.path === '/questions' && route.query.filter === 'interesting',
+      }"
     >
       Interesting
-    </a>
-    <a
-      href="#"
+    </span>
+    <span
+      @click="filterQuestions('week')"
       class="
-        text-lg text-dark
+        text-lg
         px-3
         py-1
         border-r-2 border-t-2 border-b-2 border-gray-600
@@ -57,13 +75,17 @@
         transition-all
         duration-150
       "
+      :class="{
+        'bg-dark text-white':
+          route.path === '/questions' && route.query.filter === 'week',
+      }"
     >
       Week
-    </a>
-    <a
-      href="#"
+    </span>
+    <span
+      @click="filterQuestions('month')"
       class="
-        text-lg text-dark
+        text-lg
         px-3
         py-1
         border-r-2 border-t-2 border-b-2 border-gray-600
@@ -72,14 +94,40 @@
         transition-all
         duration-150
       "
+      :class="{
+        'bg-dark text-white':
+          route.path === '/questions' && route.query.filter === 'month',
+      }"
     >
       Month
-    </a>
+    </span>
   </div>
 </template>
 
 <script>
-export default {};
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
+export default {
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const store = useStore();
+
+    const filterQuestions = (filterBy = "newest") => {
+      store.dispatch("fetchQuestionsWithPagination", {
+        filterBy,
+      });
+      router.push({
+        path: "/questions",
+        query: {
+          filter: filterBy,
+        },
+      });
+    };
+
+    return { route, filterQuestions };
+  },
+};
 </script>
 
 <style>

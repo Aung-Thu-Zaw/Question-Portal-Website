@@ -40,15 +40,26 @@ export default {
             commit("setQuestions", questionData);
         },
 
-        async fetchQuestionsWithPagination({ commit }, page = 1) {
+        async fetchQuestionsWithPagination({ commit }, payload) {
             const response = await axios.get(
-                `http://localhost:8000/api/questions?page=${page}`
+                `http://localhost:8000/api/questions?page=${payload.page}&filter=${payload.filterBy}`
             );
 
             const paginateQuestionData = response.data;
 
             commit("setPaginateQuestions", paginateQuestionData);
         },
+
+        // async fetchTagsWithPagination({ commit }, payload) {
+        //     const response = await axios.get(
+        //         `http://localhost:8000/api/tags?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
+        //     );
+
+        //     const paginateTagData = response.data;
+
+        //     commit("setPaginateTags", paginateTagData);
+        // },
+
         async fetchSingleSpecificQuestion({ commit }, slug) {
             const response = await axios.get(
                 `http://localhost:8000/api/questions/${slug}`

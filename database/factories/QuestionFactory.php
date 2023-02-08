@@ -20,7 +20,8 @@ class QuestionFactory extends Factory
             "question"=>$this->faker->sentence(),
             "slug"=>$this->faker->slug(),
             "detail"=>$this->faker->text(),
-            "view"=>"3"
+            "view"=>$this->faker->randomNumber(),
+            "created_at"=>$this->faker->dateTimeBetween("-2 months", now())
         ];
     }
 }
