@@ -142,6 +142,7 @@ export default {
           path: "/tags",
           query: {
             search: globalSearch.value,
+            filter: "newest",
           },
         });
       }

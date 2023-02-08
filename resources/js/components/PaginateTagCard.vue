@@ -80,6 +80,41 @@ export default {
         globalSearch: route.query.search ? route.query.search : "",
         filterBy: route.query.filter ? route.query.filter : "newest",
       });
+
+      if (route.query.page || page != 1) {
+        router.push({
+          path: "/tags",
+          query: {
+            page,
+            filter: route.query.filter ? route.query.filter : "newest",
+          },
+        });
+      } else {
+        router.replace({
+          path: "/tags",
+          query: {},
+        });
+      }
+
+      if (page != 1 && route.query.search) {
+        router.push({
+          path: "/tags",
+          query: {
+            page,
+            search: route.query.search ? route.query.search : "",
+            filter: route.query.filter ? route.query.filter : "newest",
+          },
+        });
+      } else if (route.query.page && route.query.search) {
+        router.push({
+          path: "/tags",
+          query: {
+            page,
+            search: route.query.search ? route.query.search : "",
+            filter: route.query.filter ? route.query.filter : "newest",
+          },
+        });
+      }
     });
 
     return {
