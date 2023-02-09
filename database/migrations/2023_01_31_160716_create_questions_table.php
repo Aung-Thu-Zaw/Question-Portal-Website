@@ -14,11 +14,10 @@ return new class () extends Migration {
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->text("question");
-            $table->text("slug");
+            $table->string("question");
             $table->text("problem_detail");
             $table->text("expect_answer");
-            $table->integer("view");
+            $table->integer("view")->default(0);
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 
@@ -25,9 +26,10 @@ class QuestionController extends Controller
         return QuestionResource::collection($questions);
     }
 
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
-        //
+        $question=Question::create($request->validated());
+        return new QuestionResource($question);
     }
 
 

@@ -17,12 +17,14 @@ class QuestionResource extends JsonResource
         return [
              "id"=>$this->id,
              "question"=>$this->question,
-             "slug"=>$this->slug,
-             "detail"=>$this->detail,
+             "slug"=>strtolower(str_replace(" ", "-", $this->question)),
+             "problem_detail"=>$this->problem_detail,
+             "expect_answer"=>$this->expect_answer,
              "view"=>$this->view,
              "created_date"=>$this->created_at->toDateString(),
              "created_time"=>$this->created_at->diffForHumans(),
              "updated_date"=>$this->updated_at->toDateString(),
+
          ];
     }
 }

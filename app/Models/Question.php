@@ -9,10 +9,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    protected $fillable=["question","problem_detail","expect_answer","view"];
 
     public function tags()
     {

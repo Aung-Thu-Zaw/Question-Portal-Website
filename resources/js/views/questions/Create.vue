@@ -21,7 +21,7 @@
           <li>Review your question and post it to the site.</li>
         </ul>
       </div>
-      <form action="" method="POST">
+      <form @submit.prevent="addQuestion">
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
           <h3 class="text-2xl font-semibold text-gray-700">Question Title *</h3>
           <p class="my-3 text-gray-500">
@@ -52,7 +52,7 @@
           <v-md-editor v-model="expectAnswer" height="400px" />
         </div>
 
-        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
+        <!-- <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
           <h3 class="text-2xl font-semibold text-gray-700">Tags *</h3>
           <p class="my-3 text-gray-500">
             Add up to 5 tags to describe what your question is about. Start
@@ -65,7 +65,7 @@
             required
             v-model="tags"
           />
-        </div>
+        </div> -->
 
         <div class="my-4 flex items-center justify-end">
           <button
@@ -91,19 +91,33 @@
 
 <script>
 import { reactive, ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const store = useStore();
+    const router = useRouter();
+
     const questionTitle = ref("");
     const problemDetail = ref("");
     const expectAnswer = ref("");
-    const tags = reactive([]);
+
+    const addQuestion = async () => {
+      await store.dispatch("createQuestion", {
+        question: questionTitle.value,
+        problem_detail: problemDetail.value,
+        expect_answer: expectAnswer.value,
+      });
+
+      router.push("/questions");
+    };
 
     return {
       questionTitle,
       problemDetail,
       expectAnswer,
-      tags,
+      addQuestion,
     };
   },
 };

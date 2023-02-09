@@ -27,6 +27,9 @@ export default {
         setSingleSpecificQuestion(state, singleSpecificQuestion) {
             state.singleSpecificQuestion = singleSpecificQuestion;
         },
+        setQuestion(state, newQuestion) {
+            state.questions.unshift(newQuestion);
+        },
     },
 
     actions: {
@@ -50,16 +53,6 @@ export default {
             commit("setPaginateQuestions", paginateQuestionData);
         },
 
-        // async fetchTagsWithPagination({ commit }, payload) {
-        //     const response = await axios.get(
-        //         `http://localhost:8000/api/tags?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
-        //     );
-
-        //     const paginateTagData = response.data;
-
-        //     commit("setPaginateTags", paginateTagData);
-        // },
-
         async fetchSingleSpecificQuestion({ commit }, slug) {
             const response = await axios.get(
                 `http://localhost:8000/api/questions/${slug}`
@@ -70,6 +63,20 @@ export default {
             console.log(singleSpecificQuestionData);
 
             commit("setSingleSpecificQuestion", singleSpecificQuestionData);
+        },
+
+        async createQuestion({ commit }, payload) {
+            console.log(payload);
+            const response = await axios.post(
+                `http://localhost:8000/api/questions`,
+                payload
+            );
+
+            const createQuestionData = response.data.data;
+
+            console.log(createQuestionData);
+
+            commit("setQuestion", createQuestionData);
         },
     },
 };
