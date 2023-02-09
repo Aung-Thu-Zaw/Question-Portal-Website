@@ -46,7 +46,13 @@
 
       <div class="flex flex-col w-full px-5 bg-light xl:flex-row">
         <div class="w-full p-5 bg-light border-r-2">
-          {{ question.detail }}
+          <p>
+            {{ question.problem_detail }}
+          </p>
+
+          <p>
+            {{ question.expect_answer }}
+          </p>
         </div>
 
         <div class="bg-light w-full xl:w-[40%]">
@@ -62,23 +68,30 @@ import { useStore } from "vuex";
 import RelatedQuestions from "../../components/RelatedQuestions.vue";
 import LeftSide from "../../components/LeftSide.vue";
 import { computed, onMounted } from "@vue/runtime-core";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: {
     RelatedQuestions,
     LeftSide,
   },
-  props: ["slug"],
+  props: ["id", "slug"],
 
   setup(props) {
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
 
     onMounted(async () => {
-      return await store.dispatch("fetchSingleSpecificQuestion", props.slug);
+      await store.dispatch("fetchSingleSpecificQuestion", props.id);
+    });
+
+    const question = computed(() => {
+      return store.getters.getSingleSpecificQuestion;
     });
 
     return {
-      question: computed(() => store.getters.getSingleSpecificQuestion),
+      question,
     };
   },
 };

@@ -18,8 +18,8 @@ class QuestionFactory extends Factory
     {
         return [
             "question"=>$this->faker->sentence(),
-            "problem_detail"=>$this->faker->text(),
-            "expect_answer"=>$this->faker->text(),
+            "problem_detail"=>$this->faker->paragraph(5),
+            "expect_answer"=>$this->faker->paragraph(5),
             "view"=>$this->faker->randomNumber(),
             "created_at"=>$this->faker->dateTimeBetween("-2 months", now())
         ];

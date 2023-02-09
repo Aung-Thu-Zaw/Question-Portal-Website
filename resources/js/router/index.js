@@ -18,7 +18,7 @@ const routes = [
         component: QuestionIndex,
     },
     {
-        path: "/questions/:slug",
+        path: "/questions/:id/:slug",
         name: "questions.details",
         component: QuestionDetails,
         props: true,

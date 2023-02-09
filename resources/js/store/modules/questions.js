@@ -60,8 +60,6 @@ export default {
 
             const singleSpecificQuestionData = response.data.data;
 
-            console.log(singleSpecificQuestionData);
-
             commit("setSingleSpecificQuestion", singleSpecificQuestionData);
         },
 

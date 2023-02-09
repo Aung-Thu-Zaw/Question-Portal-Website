@@ -22,7 +22,7 @@
             <router-link
               :to="{
                 name: 'questions.details',
-                params: { slug: question.slug },
+                params: { id: question.id, slug: question.slug },
               }"
             >
               {{ question.question }}
