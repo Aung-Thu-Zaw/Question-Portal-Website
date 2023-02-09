@@ -66,17 +66,21 @@ export default {
         },
 
         async createQuestion({ commit }, payload) {
-            console.log(payload);
             const response = await axios.post(
                 `http://localhost:8000/api/questions`,
-                payload
+                payload,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                }
             );
 
             const createQuestionData = response.data.data;
 
-            console.log(createQuestionData);
-
             commit("setQuestion", createQuestionData);
+
+            return response;
         },
     },
 };

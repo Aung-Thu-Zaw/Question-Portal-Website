@@ -34,6 +34,13 @@
             required
             v-model="questionTitle"
           />
+          <p
+            v-for="message in validationError?.question"
+            :key="message.question"
+            class="text-center text-red-600 mt-3"
+          >
+            {{ message }}
+          </p>
         </div>
 
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
@@ -42,6 +49,13 @@
             What are the details of your problem?
           </p>
           <v-md-editor v-model="problemDetail" height="400px" />
+          <p
+            v-for="message in validationError?.problem_detail"
+            :key="message.problem_detail"
+            class="text-center text-red-600 mt-3"
+          >
+            {{ message }}
+          </p>
         </div>
 
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
@@ -50,6 +64,13 @@
             What did you try and what would you expecting?
           </p>
           <v-md-editor v-model="expectAnswer" height="400px" />
+          <p
+            v-for="message in validationError?.expect_answer"
+            :key="message.expect_answer"
+            class="text-center text-red-600 mt-3"
+          >
+            {{ message }}
+          </p>
         </div>
 
         <!-- <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
@@ -71,7 +92,7 @@
           <button
             class="
               py-3
-              px-4
+              px-8
               border
               bg-blue-500
               hover:bg-blue-700
@@ -98,19 +119,31 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-
+    const validationError = ref(null);
     const questionTitle = ref("");
     const problemDetail = ref("");
     const expectAnswer = ref("");
 
     const addQuestion = async () => {
-      await store.dispatch("createQuestion", {
-        question: questionTitle.value,
-        problem_detail: problemDetail.value,
-        expect_answer: expectAnswer.value,
-      });
+      try {
+        const response = await store.dispatch("createQuestion", {
+          question: questionTitle.value,
+          problem_detail: problemDetail.value,
+          expect_answer: expectAnswer.value,
+        });
 
-      router.push("/questions");
+        if (!response) {
+          throw new Error("Data response not found!");
+        }
+
+        router.push("/questions");
+      } catch (error) {
+        if (error.response?.data) {
+          validationError.value = error.response.data.errors;
+        }
+
+        console.log(error.message);
+      }
     };
 
     return {
@@ -118,6 +151,7 @@ export default {
       problemDetail,
       expectAnswer,
       addQuestion,
+      validationError,
     };
   },
 };
