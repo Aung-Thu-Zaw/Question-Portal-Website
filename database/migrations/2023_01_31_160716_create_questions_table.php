@@ -16,7 +16,8 @@ return new class () extends Migration {
             $table->id();
             $table->text("question");
             $table->text("slug");
-            $table->text("detail");
+            $table->text("problem_detail");
+            $table->text("expect_answer");
             $table->integer("view");
             $table->timestamps();
         });

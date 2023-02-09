@@ -23,45 +23,50 @@
       </div>
       <form action="" method="POST">
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
-          <h3 class="text-2xl font-semibold">Title *</h3>
-          <p class="my-3">
+          <h3 class="text-2xl font-semibold text-gray-700">Question Title *</h3>
+          <p class="my-3 text-gray-500">
             Be specific and imagine you're asking a question to another person.
           </p>
           <input
             type="text"
-            class="
-              border-2
-              p-3
-              w-full
-              outline-none
-              rounded-md
-              focus:border-blue-400 focus:shadow-inner
-              transition-all
-            "
+            class="border-2 p-3 w-full outline-none rounded-md"
             placeholder="Write Your Question?"
+            required
+            v-model="questionTitle"
           />
         </div>
-        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
-          <h3 class="text-2xl font-semibold">Detail *</h3>
-          <p class="my-3">Write it down your techanical problem.</p>
 
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            class="
-              border-2
-              p-3
-              w-full
-              outline-none
-              rounded-md
-              focus:border-blue-400 focus:shadow-inner
-              transition-all
-            "
-            placeholder="Write Your Problem Detail"
-          ></textarea>
+        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
+          <h3 class="text-2xl font-semibold text-gray-700">Problem Detail *</h3>
+          <p class="my-3 text-gray-500">
+            What are the details of your problem?
+          </p>
+          <v-md-editor v-model="problemDetail" height="400px" />
         </div>
+
+        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
+          <h3 class="text-2xl font-semibold text-gray-700">Expect Answer *</h3>
+          <p class="my-3 text-gray-500">
+            What did you try and what would you expecting?
+          </p>
+          <v-md-editor v-model="expectAnswer" height="400px" />
+        </div>
+
+        <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
+          <h3 class="text-2xl font-semibold text-gray-700">Tags *</h3>
+          <p class="my-3 text-gray-500">
+            Add up to 5 tags to describe what your question is about. Start
+            typing to see suggestions.
+          </p>
+          <input
+            type="text"
+            class="border-2 p-3 w-full outline-none rounded-md"
+            placeholder="Eg. (html, css, javascript)"
+            required
+            v-model="tags"
+          />
+        </div>
+
         <div class="my-4 flex items-center justify-end">
           <button
             class="
@@ -69,7 +74,8 @@
               px-4
               border
               bg-blue-500
-              hover:bg-blue-700 hover:text-white
+              hover:bg-blue-700
+              text-white
               transition-all
               rounded-lg
               font-bold
@@ -84,7 +90,23 @@
 </template>
 
 <script>
-export default {};
+import { reactive, ref } from "@vue/reactivity";
+
+export default {
+  setup() {
+    const questionTitle = ref("");
+    const problemDetail = ref("");
+    const expectAnswer = ref("");
+    const tags = reactive([]);
+
+    return {
+      questionTitle,
+      problemDetail,
+      expectAnswer,
+      tags,
+    };
+  },
+};
 </script>
 
 <style>
