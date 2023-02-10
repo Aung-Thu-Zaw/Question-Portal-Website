@@ -77,6 +77,8 @@
     </div>
     <div class="flex items-center flex-wrap w-full">
       <a
+        v-for="tag in question.tags"
+        :key="tag.id"
         href="#"
         class="
           bg-slate-500
@@ -88,35 +90,7 @@
           mr-2
         "
       >
-        HTML
-      </a>
-      <a
-        href="#"
-        class="
-          bg-slate-500
-          text-white
-          px-5
-          py-1
-          text-sm text-bold
-          rounded-sm
-          mr-2
-        "
-      >
-        Css
-      </a>
-      <a
-        href="#"
-        class="
-          bg-slate-500
-          text-white
-          px-5
-          py-1
-          text-sm text-bold
-          rounded-sm
-          mr-2
-        "
-      >
-        Javascript
+        {{ tag.name }}
       </a>
     </div>
     <div
