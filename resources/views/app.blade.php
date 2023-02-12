@@ -22,7 +22,7 @@
 
 <body class="antialiased">
     <div id="app" style="position: relative;">
-
+        <router-view />
     </div>
     @vite("resources/js/app.js")
 

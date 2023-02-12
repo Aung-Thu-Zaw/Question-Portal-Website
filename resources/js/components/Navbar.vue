@@ -65,7 +65,7 @@
       </form>
 
       <!-- Notification And  Profile -->
-      <div class="flex items-center justify-between w-[150px] md:w-[120px]">
+      <div class="flex items-center justify-evenly w-[150px] md:w-[170px]">
         <!-- Search Bar Mobile Button-->
         <div
           class="
@@ -74,6 +74,7 @@
             items-center
             justify-between
             p-3
+            mr-3
             bg-mid
             rounded-3xl
             md:hidden
@@ -91,8 +92,38 @@
           ></i>
         </div>
 
+        <div class="flex items-center justify-between w-full">
+          <router-link
+            :to="{ name: 'register' }"
+            class="
+              text-white
+              p-2
+              border
+              bg-slate-800
+              rounded-md
+              hover:bg-slate-900
+              mr-2
+            "
+          >
+            Register
+          </router-link>
+          <router-link
+            :to="{ name: 'login' }"
+            class="
+              text-white
+              p-2
+              border
+              bg-slate-800
+              rounded-md
+              hover:bg-slate-900
+              mr-2
+            "
+          >
+            Login
+          </router-link>
+        </div>
         <!-- Notification Button -->
-        <div
+        <!-- <div
           class="
             relative
             group
@@ -123,9 +154,9 @@
             "
             >99</span
           >
-        </div>
+        </div> -->
         <!-- Profile Button -->
-        <div @click="isProfileBoxHidden = !isProfileBoxHidden">
+        <!-- <div @click="isProfileBoxHidden = !isProfileBoxHidden">
           <img
             src="https://media.istockphoto.com/id/1176489653/fr/photo/belle-femme-noire-%C3%A9tonn%C3%A9e.jpg?s=170667a&w=0&k=20&c=0Gbbr4RSXCrOVYgSBc2wJFeTO9O5z-qcxL2S5DsgMHo="
             alt=""
@@ -138,7 +169,7 @@
               hover:cursor-pointer
             "
           />
-        </div>
+        </div> -->
       </div>
     </div>
 

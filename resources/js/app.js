@@ -1,6 +1,5 @@
 import "./bootstrap";
 import { createApp } from "vue";
-import App from "./layouts/App.vue";
 import router from "./router";
 import store from "./store";
 
@@ -18,4 +17,4 @@ VMdEditor.use(vuepressTheme, {
     Prism,
 });
 
-createApp(App).use(router).use(store).use(VMdEditor).mount("#app");
+createApp({}).use(router).use(store).use(VMdEditor).mount("#app");
