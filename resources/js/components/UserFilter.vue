@@ -19,6 +19,7 @@
             type="text"
             name=""
             id=""
+            v-model="globalSearch"
             class="w-full outline-none bg-transparent placeholder:text-gray-600"
             placeholder="Search..."
           />
@@ -83,9 +84,64 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const page = ref("1");
+    const globalSearch = ref(route.query.search ? route.query.search : "");
+
+    watch(globalSearch, (current, previous) => {
+      store.dispatch("fetchUsersWithPagination", {
+        page: page.value,
+        globalSearch: globalSearch.value,
+        filterBy: route.query.filter,
+        current,
+      });
+
+      if (route.query.filter) {
+        router.push({
+          path: "/users",
+          query: {
+            search: globalSearch.value,
+            filter: route.query.filter,
+          },
+        });
+      } else {
+        router.push({
+          path: "/users",
+          query: {
+            search: globalSearch.value,
+            filter: "newusers",
+          },
+        });
+      }
+    });
+
+    const filterUsers = (filterBy = "newusers") => {
+      store.dispatch("fetchUsersWithPagination", {
+        page: page.value,
+        globalSearch: globalSearch.value,
+        filterBy,
+      });
+
+      if (route.query.search) {
+        router.push({
+          path: "/users",
+          query: {
+            search: route.query.search,
+            filter: filterBy,
+          },
+        });
+      } else {
+        router.push({
+          path: "/users",
+          query: {
+            filter: filterBy,
+          },
+        });
+      }
+    };
 
     return {
       route,
+      globalSearch,
+      filterUsers,
     };
   },
 };

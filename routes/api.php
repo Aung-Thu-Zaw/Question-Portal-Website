@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\HomeQuestionController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,5 @@ Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("
 Route::apiResources([
     'questions' => QuestionController::class,
     'tags' => TagController::class,
+    'users' => UserController::class,
 ]);
