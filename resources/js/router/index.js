@@ -8,6 +8,7 @@ import QuestionCreate from "../views/questions/Create.vue";
 import QuestionEdit from "../views/questions/Edit.vue";
 import QuestionDetails from "../views/questions/Details.vue";
 import TagIndex from "../views/tags/Index.vue";
+import UserIndex from "../views/users/Index.vue";
 import Register from "../views/auth/Register.vue";
 import Login from "../views/auth/Login.vue";
 
@@ -46,6 +47,11 @@ const routes = [
                 path: "tags",
                 name: "tags.index",
                 component: TagIndex,
+            },
+            {
+                path: "users",
+                name: "users.index",
+                component: UserIndex,
             },
         ],
     },

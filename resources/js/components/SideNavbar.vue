@@ -65,23 +65,25 @@
       </div>
     </router-link>
 
-    <div
-      class="
-        text-md
-        py-3
-        border-b-2
-        px-5
-        hover:bg-dark hover:opacity-75 hover:text-white
-        transition-all
-      "
-      :class="{
-        'bg-dark text-white': route.path === '/users',
-        'text-gray-700': route.path != '/users',
-      }"
-    >
-      <i class="fa-solid fa-users mr-3"></i>
-      <span>Users</span>
-    </div>
+    <router-link :to="{ name: 'users.index' }">
+      <div
+        class="
+          text-md
+          py-3
+          border-b-2
+          px-5
+          hover:bg-dark hover:opacity-75 hover:text-white
+          transition-all
+        "
+        :class="{
+          'bg-dark text-white': route.path === '/users',
+          'text-gray-700': route.path != '/users',
+        }"
+      >
+        <i class="fa-solid fa-users mr-3"></i>
+        <span>Users</span>
+      </div>
+    </router-link>
   </div>
 
   <!-- Question Groups -->
