@@ -4,7 +4,7 @@ export default {
     state: {
         questions: [],
         paginateQuestions: [],
-        singleSpecificQuestion: [],
+        singleSpecificQuestion: {},
     },
     getters: {
         getQuestions(state) {
@@ -34,51 +34,83 @@ export default {
 
     actions: {
         async fetchAllQuestions({ commit }) {
-            const response = await axios.get(
-                "http://localhost:8000/api/latest-questions"
-            );
+            try {
+                const response = await axios.get(
+                    "http://localhost:8000/api/latest-questions"
+                );
 
-            const questionData = response.data.data;
+                if (!response.data) {
+                    throw new Error("Response not found!");
+                }
 
-            commit("setQuestions", questionData);
+                const questionData = response.data.data;
+
+                commit("setQuestions", questionData);
+            } catch (error) {
+                console.log(error.message);
+            }
         },
 
         async fetchQuestionsWithPagination({ commit }, payload) {
-            const response = await axios.get(
-                `http://localhost:8000/api/questions?page=${payload.page}&filter=${payload.filterBy}`
-            );
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/questions?page=${payload.page}&filter=${payload.filterBy}`
+                );
 
-            const paginateQuestionData = response.data;
+                if (!response.data) {
+                    throw new Error("Response not found!");
+                }
 
-            commit("setPaginateQuestions", paginateQuestionData);
+                const paginateQuestionData = response.data;
+
+                commit("setPaginateQuestions", paginateQuestionData);
+            } catch (error) {
+                console.log(error);
+            }
         },
 
         async fetchSingleSpecificQuestion({ commit }, slug) {
-            const response = await axios.get(
-                `http://localhost:8000/api/questions/${slug}`
-            );
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/questions/${slug}`
+                );
 
-            const singleSpecificQuestionData = response.data.data;
+                if (!response.data) {
+                    throw new Error("Response not found!");
+                }
 
-            commit("setSingleSpecificQuestion", singleSpecificQuestionData);
+                const singleSpecificQuestionData = response.data.data;
+
+                commit("setSingleSpecificQuestion", singleSpecificQuestionData);
+            } catch (error) {
+                console.log(error.message);
+            }
         },
 
         async createQuestion({ commit }, payload) {
-            const response = await axios.post(
-                `http://localhost:8000/api/questions`,
-                payload,
-                {
-                    headers: {
-                        "content-type": "application/json",
-                    },
+            try {
+                const response = await axios.post(
+                    `http://localhost:8000/api/questions`,
+                    payload,
+                    {
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                    }
+                );
+
+                if (!response.data) {
+                    throw new Error("Response not found!");
                 }
-            );
 
-            const createQuestionData = response.data.data;
+                const createQuestionData = response.data.data;
 
-            commit("setQuestion", createQuestionData);
+                commit("setQuestion", createQuestionData);
 
-            return response;
+                return response;
+            } catch (error) {
+                console.log(error.message);
+            }
         },
     },
 };

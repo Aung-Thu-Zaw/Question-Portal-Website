@@ -17,13 +17,21 @@ export default {
 
     actions: {
         async fetchTagsWithPagination({ commit }, payload) {
-            const response = await axios.get(
-                `http://localhost:8000/api/tags?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
-            );
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/tags?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
+                );
 
-            const paginateTagData = response.data;
+                if (!response.data) {
+                    throw new Error("Response not found!");
+                }
 
-            commit("setPaginateTags", paginateTagData);
+                const paginateTagData = response.data;
+
+                commit("setPaginateTags", paginateTagData);
+            } catch (error) {
+                console.log(error.message);
+            }
         },
     },
 };

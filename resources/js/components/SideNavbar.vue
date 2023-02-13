@@ -11,7 +11,6 @@
         border-2
         rounded-md
         shadow-md
-        bg-white
         hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "

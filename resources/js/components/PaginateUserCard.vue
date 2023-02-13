@@ -36,7 +36,6 @@
       </div>
     </div>
   </div>
-
   <div class="flex items-center justify-center w-full">
     <TailwindPagination
       class="flex items-center"

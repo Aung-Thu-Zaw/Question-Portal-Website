@@ -17,13 +17,21 @@ export default {
 
     actions: {
         async fetchUsersWithPagination({ commit }, payload) {
-            const response = await axios.get(
-                `http://localhost:8000/api/users?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
-            );
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/users?page=${payload.page}&search=${payload.globalSearch}&filter=${payload.filterBy}`
+                );
 
-            const paginateUsersData = response.data;
+                if (!response.data) {
+                    throw new Error("Response not found!");
+                }
 
-            commit("setPaginateUsers", paginateUsersData);
+                const paginateUsersData = response.data;
+
+                commit("setPaginateUsers", paginateUsersData);
+            } catch (error) {
+                console.log(error.message);
+            }
         },
     },
 };
