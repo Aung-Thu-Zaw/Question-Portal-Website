@@ -1,38 +1,18 @@
 <template>
-  <div
-    class="
-      grid grid-cols-1
-      gap-3
-      sm:grid-cols-2
-      md:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-4
-    "
-  >
-    <div
-      v-for="user in users.data"
-      :key="user.id"
-      class="
-        border-2 border-gray-500
-        shadow-sm
-        rounded-sm
-        h-auto
-        max-h-170px
-        p-5
-      "
-    >
+  <div class="grid-card-container">
+    <div v-for="user in users.data" :key="user.id" class="grid-card">
       <div class="flex items-center mb-3">
         <img src="../assets/images/logo-dark.png" alt="" class="w-12 mr-3" />
         <div class="flex flex-col items-start justify-between">
-          <span class="text-lg font-bold text-slate-500"
+          <span class="text-lg font-bold text-slate-600"
             >{{ user.id }} {{ user.name }}</span
           >
           <span class="text-sm text-slate-500">taninaryi , Myeik</span>
         </div>
       </div>
       <div class="flex flex-wrap items-center justify-between">
-        <span class="text-sm text-slate-500">18 questions</span>
-        <span class="text-sm text-slate-500">5 answers</span>
+        <span>18 questions</span>
+        <span>5 answers</span>
       </div>
     </div>
   </div>

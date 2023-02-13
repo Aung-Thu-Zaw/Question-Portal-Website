@@ -11,6 +11,8 @@
         border-2
         rounded-md
         shadow-md
+        text-gray-700
+        font-bold
         hover:bg-dark hover:opacity-75 hover:text-white
         transition-all
       "
@@ -40,7 +42,7 @@
         }"
       >
         <i class="fa-solid fa-question mr-3"></i>
-        <span>Questions</span>
+        <small>Questions</small>
       </div>
     </router-link>
 
@@ -60,7 +62,7 @@
         }"
       >
         <i class="fa-solid fa-tag mr-3"></i>
-        <span>Tags</span>
+        <small>Tags</small>
       </div>
     </router-link>
 
@@ -80,7 +82,7 @@
         }"
       >
         <i class="fa-solid fa-users mr-3"></i>
-        <span>Users</span>
+        <small>Users</small>
       </div>
     </router-link>
   </div>

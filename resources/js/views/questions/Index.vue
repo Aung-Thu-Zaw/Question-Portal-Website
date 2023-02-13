@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex w-full min-h-screen bg-light mt-20">
+  <div class="relative flex w-full min-h-screen bg-light mt-20 font-rubik">
     <!-- Left Side -->
     <LeftSide />
 

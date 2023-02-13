@@ -21,7 +21,7 @@ module.exports = {
                 light: "#F8FAFC",
             },
             fontFamily: {
-                libre: ["Libre Baskerville", "serif"],
+                rubik: ["Rubik", "sans-serif"],
                 playfair: ["Playfair Display", "serif"],
             },
         },

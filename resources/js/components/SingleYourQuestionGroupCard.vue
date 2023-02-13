@@ -8,10 +8,10 @@
       />
       <div class="flex flex-col justify-between w-full">
         <div class="flex flex-wrap items-center justify-between">
-          <span class="text-xl font-mid">Laravel</span>
-          <span class="text-sm text-gray-500">members 3K</span>
+          <span class="text-lg font-bold">Laravel</span>
+          <span>members 3K</span>
         </div>
-        <span class="text-sm text-gray-500">12 post a day</span>
+        <span>12 post a day</span>
       </div>
     </div>
   </a>

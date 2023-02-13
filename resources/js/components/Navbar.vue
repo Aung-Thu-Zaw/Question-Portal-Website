@@ -398,6 +398,8 @@
 
         <SingleYourDiscussionGroupCard />
       </div>
+
+      
     </div>
   </nav>
 </template>

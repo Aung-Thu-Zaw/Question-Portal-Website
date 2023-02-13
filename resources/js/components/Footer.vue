@@ -12,7 +12,6 @@
         md:flex-row md:space-y-0
       "
     >
-    
       <div class="">
         <h3 class="text-center text-2xl border-b mb-5">Useful Links</h3>
         <ul class="list-disc">

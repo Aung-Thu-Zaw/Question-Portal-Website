@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex w-full min-h-screen bg-light mt-16">
+  <div class="relative flex w-full min-h-screen bg-light mt-20 font-rubik">
     <LeftSide />
 
     <div class="w-full p-3 bg-light space-y-5 border-l-2 lg:w-[70%]">

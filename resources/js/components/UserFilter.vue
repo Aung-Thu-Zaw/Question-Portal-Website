@@ -2,25 +2,13 @@
   <div class="flex flex-wrap items-center justify-between">
     <div class="mb-5">
       <form method="GET">
-        <div
-          class="
-            flex
-            items-center
-            justify-between
-            p-2
-            bg-mid
-            border border-gray-400
-            rounded-sm
-            min-w-[80px]
-            w-[300px]
-          "
-        >
+        <div class="filter-search-box">
           <input
             type="text"
             name=""
             id=""
             v-model="globalSearch"
-            class="w-full outline-none bg-transparent placeholder:text-gray-600"
+            class="filter-search-input"
             placeholder="Search..."
           />
           <i class="fa-solid fa-magnifying-glass ml-4 text-gray-500"></i>
@@ -30,16 +18,7 @@
     <div class="flex items-center justify-end mb-5">
       <span
         @click="filterUsers('newusers')"
-        class="
-          text-lg
-          px-3
-          py-1
-          border-2 border-gray-600
-          hover:bg-gray-400 hover:text-white
-          active:bg-gray-500
-          transition-all
-          duration-150
-        "
+        class="filter-button border-l-2"
         :class="{
           'bg-dark text-white':
             route.path === '/users' && route.query.filter === 'newusers',
@@ -51,16 +30,7 @@
       </span>
       <span
         @click="filterUsers('oldusers')"
-        class="
-          text-lg
-          px-3
-          py-1
-          border-r-2 border-t-2 border-b-2 border-gray-600
-          hover:bg-gray-400 hover:text-white
-          active:bg-gray-500
-          transition-all
-          duration-150
-        "
+        class="filter-button"
         :class="{
           'bg-dark text-white':
             route.path === '/users' && route.query.filter === 'oldusers',

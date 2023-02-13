@@ -1,26 +1,6 @@
 <template>
-  <div
-    class="
-      grid grid-cols-1
-      gap-3
-      sm:grid-cols-2
-      md:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-4
-    "
-  >
-    <div
-      v-for="tag in tags.data"
-      :key="tag.id"
-      class="
-        border-2 border-gray-500
-        shadow-sm
-        rounded-sm
-        h-auto
-        max-h-170px
-        p-5
-      "
-    >
+  <div class="grid-card-container">
+    <div v-for="tag in tags.data" :key="tag.id" class="grid-card">
       <div class="flex flex-col items-start justify-between mb-2">
         <a
           href="#"
@@ -42,8 +22,8 @@
         </p>
       </div>
       <div class="flex items-center justify-between">
-        <span class="text-sm text-gray-500">1 Questions</span>
-        <span class="text-sm text-gray-500">{{ tag.created_time }}</span>
+        <span>1 Questions</span>
+        <span>{{ tag.created_time }}</span>
       </div>
     </div>
   </div>

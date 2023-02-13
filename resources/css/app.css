@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply block text-[2em] my-[0.67em] mx-0 font-bold text-slate-600;
+    }
+    h2 {
+        @apply block text-[1.5em] my-[0.83em] mx-0 font-bold text-slate-600;
+    }
+    h3 {
+        @apply block text-[1.17em] my-[1em] mx-0 font-bold text-slate-600;
+    }
+    h4 {
+        @apply block text-[1em] my-[1.33em] mx-0 font-bold text-slate-600;
+    }
+    h5 {
+        @apply block text-[0.83em] my-[1.67em] mx-0 font-bold text-slate-600;
+    }
+    h6 {
+        @apply block text-[0.67em] my-[2.33em] mx-0 font-bold text-slate-600;
+    }
+    span {
+        @apply text-sm text-gray-500;
+    }
+}
+
+.filter-button {
+    @apply text-sm font-semibold px-3 py-2 border-r-2 border-t-2 border-b-2 border-gray-600 hover:bg-gray-400 hover:text-white active:bg-gray-500 transition-all duration-150 cursor-pointer;
+}
+
+.filter-search-box {
+    @apply flex items-center justify-between p-2 bg-mid border border-gray-400 rounded-sm min-w-[80px] w-[300px];
+}
+
+.filter-search-input {
+    @apply w-full outline-none bg-transparent placeholder:text-gray-600;
+}
+.group-card-container {
+    @apply flex flex-col border p-2 rounded-md space-y-3 bg-white;
+}
+
+.single-group-card {
+    @apply flex flex-wrap items-center justify-between w-full border-b-2 p-2 mb-2;
+}
+
+.group-card-btn {
+    @apply border-2 border-dark px-3 py-1 rounded-md hover:bg-dark hover:text-white transition-all;
+}
+
+.grid-card-container {
+    @apply grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.grid-card {
+    @apply border-2 border-gray-500 shadow-sm rounded-sm h-auto p-5;
+}
+
+.question-card {
+    @apply flex flex-col items-start justify-between shadow-lg bg-light p-5 border-2 border-gray-200 space-y-5 rounded-md;
+}
+
+.question-tag {
+    @apply bg-slate-500 text-white px-5 py-1 text-sm font-bold rounded-sm mr-2;
+}
+
+.right-single-group-card {
+    @apply border-2 flex flex-col items-center justify-between p-5 rounded-md shadow-sm bg-gray-50;
+}
+
+.single-group-card-btn {
+    @apply border-2 border-dark px-3 py-1 text-sm rounded-md hover:bg-dark hover:text-white transition-all;
+}

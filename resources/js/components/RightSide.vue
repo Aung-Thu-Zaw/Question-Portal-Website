@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden bg-light lg:block lg:w-1/4 p-5 space-y-5">
+  <div class="hidden bg-light lg:block lg:w-1/4 p-5 space-y-5 font-rubik">
     <QuestionGroupsCardBox />
 
     <DiscussionGroupsCardBox />

@@ -2,16 +2,7 @@
   <div class="flex items-center justify-end">
     <span
       @click="filterQuestions('newest')"
-      class="
-        text-lg
-        px-3
-        py-1
-        border-2 border-gray-600
-        hover:bg-gray-400 hover:text-white
-        active:bg-gray-500
-        transition-all
-        duration-150
-      "
+      class="filter-button border-l-2"
       :class="{
         'bg-dark text-white':
           route.path === '/questions' && route.query.filter === 'newest',
@@ -27,16 +18,7 @@
     </span>
     <span
       @click="filterQuestions('oldest')"
-      class="
-        text-lg
-        px-3
-        py-1
-        border-r-2 border-t-2 border-b-2 border-gray-600
-        hover:bg-gray-400 hover:text-white
-        active:bg-gray-500
-        transition-all
-        duration-150
-      "
+      class="filter-button"
       :class="{
         'bg-dark text-white':
           route.path === '/questions' && route.query.filter === 'oldest',
@@ -46,16 +28,7 @@
     </span>
     <span
       @click="filterQuestions('interesting')"
-      class="
-        text-lg
-        px-3
-        py-1
-        border-r-2 border-t-2 border-b-2 border-gray-600
-        hover:bg-gray-400 hover:text-white
-        active:bg-gray-500
-        transition-all
-        duration-150
-      "
+      class="filter-button"
       :class="{
         'bg-dark text-white':
           route.path === '/questions' && route.query.filter === 'interesting',
@@ -65,16 +38,7 @@
     </span>
     <span
       @click="filterQuestions('week')"
-      class="
-        text-lg
-        px-3
-        py-1
-        border-r-2 border-t-2 border-b-2 border-gray-600
-        hover:bg-gray-400 hover:text-white
-        active:bg-gray-500
-        transition-all
-        duration-150
-      "
+      class="filter-button"
       :class="{
         'bg-dark text-white':
           route.path === '/questions' && route.query.filter === 'week',
@@ -84,16 +48,7 @@
     </span>
     <span
       @click="filterQuestions('month')"
-      class="
-        text-lg
-        px-3
-        py-1
-        border-r-2 border-t-2 border-b-2 border-gray-600
-        hover:bg-gray-400 hover:text-white
-        active:bg-gray-500
-        transition-all
-        duration-150
-      "
+      class="filter-button"
       :class="{
         'bg-dark text-white':
           route.path === '/questions' && route.query.filter === 'month',
