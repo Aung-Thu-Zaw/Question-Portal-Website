@@ -40,10 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'team'=>[
-            'driver'=>'session',
-            'provider'=>'team_users'
-        ]
+
     ],
 
     /*
@@ -68,10 +65,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'team_users'=>[
-            'driver'=>'eloquent',
-            'model' => App\Models\TeamUser::class,
-        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -101,12 +94,6 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'team_users'=>[
-            'provider' => 'team_users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ]
     ],
 
     /*
