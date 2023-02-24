@@ -36,11 +36,12 @@
 </template>
 
   <script>
+import { useToast } from "vue-toastification";
 import RightSide from "../components/RightSide.vue";
 import LeftSide from "../components/LeftSide.vue";
 import QuestionFilterButton from "../components/QuestionFilterButton.vue";
 import QuestionCard from "../components/QuestionCard.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default {
   components: {
     RightSide,
@@ -51,6 +52,14 @@ export default {
 
   setup() {
     const route = useRoute();
+    const router = useRouter();
+    const toast = useToast();
+
+    if (route.query.message) {
+      toast(route.query.message);
+
+      router.replace({ path: "/" });
+    }
 
     return {};
   },

@@ -161,7 +161,7 @@ export default {
 
         return router.push({
           path: "/",
-          query: { message: "Your account is register successfully" },
+          query: { message: "Your have successfully registered" },
         });
       } catch (error) {
         if (error.response?.data) {

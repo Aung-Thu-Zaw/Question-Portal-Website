@@ -135,7 +135,7 @@ export default {
 
         return router.push({
           path: "/",
-          query: { message: "Welcome Back" },
+          query: { message: `Welcome Back ${store.getters.getUser.name}` },
         });
       } catch (error) {
         if (error.response?.data) {

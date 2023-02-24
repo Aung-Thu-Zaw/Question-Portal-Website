@@ -23,20 +23,17 @@ export default {
     },
 
     actions: {
-        async register({ commit }, registerFormData) {
+        async register({ state, commit }, registerFormData) {
             const response = await axios.post(
                 `http://localhost:8000/api/users/register`,
                 registerFormData,
                 {
                     headers: {
-                        "content-type": "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `${state.token}`,
                     },
                 }
             );
-
-            axios.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${response.data.data.token}`;
 
             commit("setToken", response.data.data.token);
             commit("setUser", response.data.data.user);
@@ -44,19 +41,17 @@ export default {
             return response;
         },
 
-        async login({ commit }, loginFormData) {
+        async login({ state, commit }, loginFormData) {
             const response = await axios.post(
                 `http://localhost:8000/api/users/login`,
                 loginFormData,
                 {
                     headers: {
-                        "content-type": "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer${state.token}`,
                     },
                 }
             );
-            axios.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${response.data.data.token}`;
 
             commit("setUser", response.data.data.user);
             commit("setToken", response.data.data.token);
@@ -65,7 +60,7 @@ export default {
         },
 
         async logout({ state, commit }) {
-            await axios.post(`http://localhost:8000/api/users/logout`, {
+            await axios.post(`http://localhost:8000/api/users/logout`, null, {
                 headers: {
                     Authorization: `Bearer ${state.token}`,
                 },

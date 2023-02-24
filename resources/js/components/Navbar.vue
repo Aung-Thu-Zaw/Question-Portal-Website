@@ -46,8 +46,29 @@
         </div>
       </form>
 
+      <div
+        v-if="!user"
+        class="flex items-center justify-evenly w-[150px] md:w-[170px]"
+      >
+        <router-link
+          :to="{ name: 'register' }"
+          class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
+        >
+          Register
+        </router-link>
+        <router-link
+          :to="{ name: 'login' }"
+          class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
+        >
+          Login
+        </router-link>
+      </div>
+
       <!-- Notification And  Profile -->
-      <div class="flex items-center justify-evenly w-[150px] md:w-[170px]">
+      <div
+        v-if="user"
+        class="flex items-center justify-evenly w-[150px] md:w-[170px]"
+      >
         <!-- Search Bar Mobile Button-->
         <div
           class="group flex items-center justify-between p-3 mr-3 bg-mid rounded-3xl md:hidden hover:cursor-pointer hover:bg-gray-600 transition-all"
@@ -57,76 +78,31 @@
             class="fa-solid fa-magnifying-glass text-gray-700 group-hover:text-white"
           ></i>
         </div>
-
-        <div class="flex items-center justify-between w-full">
-          <router-link
-            :to="{ name: 'register' }"
-            class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
-          >
-            Register
-          </router-link>
-          <router-link
-            :to="{ name: 'login' }"
-            class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
-          >
-            Login
-          </router-link>
-
-          <button type="submit" @click="handleLogout">Logout</button>
-        </div>
         <!-- Notification Button -->
-        <!-- <div
-          class="
-            relative
-            group
-            flex
-            items-center
-            justify-center
-            w-4
-            h-4
-            p-5
-            rounded-full
-            bg-mid
-            hover:bg-gray-600 hover:cursor-pointer
-            transition-all
-          "
+        <div
+          class="relative group flex items-center justify-center w-4 h-4 p-5 rounded-full bg-mid hover:bg-gray-600 hover:cursor-pointer transition-all"
           @click="isNotificationBoxHidden = !isNotificationBoxHidden"
         >
           <i class="fa-solid fa-bell text-gray-700 group-hover:text-white"></i>
           <span
-            class="
-              absolute
-              -top-2
-              -right-2
-              text-center text-sm text-white
-              bg-red-600
-              w-5
-              h-5
-              rounded-full
-            "
+            class="absolute -top-2 -right-2 text-center text-sm text-white bg-red-600 w-5 h-5 rounded-full"
             >99</span
           >
-        </div> -->
+        </div>
         <!-- Profile Button -->
-        <!-- <div @click="isProfileBoxHidden = !isProfileBoxHidden">
+        <div @click="isProfileBoxHidden = !isProfileBoxHidden">
           <img
             src="https://media.istockphoto.com/id/1176489653/fr/photo/belle-femme-noire-%C3%A9tonn%C3%A9e.jpg?s=170667a&w=0&k=20&c=0Gbbr4RSXCrOVYgSBc2wJFeTO9O5z-qcxL2S5DsgMHo="
             alt=""
-            class="
-              w-10
-              h-10
-              rounded-full
-              object-cover object-center
-              ring-2 ring-blue-500
-              hover:cursor-pointer
-            "
+            class="w-10 h-10 rounded-full object-cover object-center ring-2 ring-blue-500 hover:cursor-pointer"
           />
-        </div> -->
+        </div>
       </div>
     </div>
 
     <!-- Notification Box-->
     <div
+      v-if="user"
       class="absolute right-3 z-10 w-[350px] h-[930px] p-2 bg-white rounded-lg shadow-2xl border-cyan-900 overflow-y-scroll notification-scroll"
       :class="toggleNotificationBox"
     >
@@ -168,18 +144,22 @@
 
     <!-- Profile Box -->
     <div
+      v-if="user"
       class="absolute top-15 right-0 w-[150px] h-auto z-10 bg-white rounded-md shadow-lg border-2 border-gray-300"
       :class="toggleProfileBox"
     >
       <div
-        class="py-2 px-4 w-full text-sm hover:bg-gray-400 transition-all border-b-2"
+        class="py-2 px-4 w-full text-sm hover:bg-gray-400 transition-all border-b-2 cursor-pointer"
       >
         <i class="fa-solid fa-id-card mr-3"></i>
-        <span> Profile </span>
+        <span class="text-slate-800 font-bold"> Profile </span>
       </div>
-      <div class="py-2 px-4 w-full text-sm hover:bg-gray-400 transition-all">
+      <div
+        class="py-2 px-4 w-full text-sm hover:bg-gray-400 transition-all cursor-pointer"
+        @click="handleLogout"
+      >
         <i class="fa-solid fa-right-from-bracket mr-3"></i>
-        <span> Logout </span>
+        <span class="text-slate-800 font-bold"> Logout </span>
       </div>
     </div>
 
@@ -269,6 +249,7 @@ import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
 import { ref } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   components: {
     SingleYourQuestionGroupCard,
@@ -277,6 +258,7 @@ export default {
 
   setup() {
     const store = useStore();
+    const router = useRouter();
     const isNotificationBoxHidden = ref(true);
     const isProfileBoxHidden = ref(true);
     const isSearchBoxHidden = ref(true);
@@ -314,8 +296,12 @@ export default {
       };
     });
 
+    const user = computed(() => store.getters.getUser);
+
     const handleLogout = async () => {
       await store.dispatch("logout");
+
+      window.location.href = `/?message=See you later!`;
     };
 
     return {
@@ -330,6 +316,7 @@ export default {
       toggleMobileSearchInput,
       toggleHamburgerButton,
       toggleMobileMenu,
+      user,
       handleLogout,
     };
   },
