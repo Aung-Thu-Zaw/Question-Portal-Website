@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store/index";
 
 import AppLayout from "../layouts/App.vue";
 import GuestLayout from "../layouts/Guest.vue";
@@ -11,6 +12,7 @@ import TagIndex from "../views/tags/Index.vue";
 import UserIndex from "../views/users/Index.vue";
 import Register from "../views/auth/Register.vue";
 import Login from "../views/auth/Login.vue";
+import NotFound from "../components/NotFound.vue";
 
 const routes = [
     {
@@ -66,13 +68,31 @@ const routes = [
                 path: "register",
                 name: "register",
                 component: Register,
+                beforeEnter(to, from, next) {
+                    if (!store.getters.getUser) {
+                        next();
+                    } else {
+                        next({ name: "home" });
+                    }
+                },
             },
             {
                 path: "login",
                 name: "login",
                 component: Login,
+                beforeEnter(to, from, next) {
+                    if (!store.getters.getUser) {
+                        next();
+                    } else {
+                        next({ name: "home" });
+                    }
+                },
             },
         ],
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound,
     },
 ];
 
