@@ -19,7 +19,7 @@ class UserAuthController extends Controller
         return $this->success(
             [
             "user"=>$user,
-            "token"=>$user->createToken($user->name)->plainTextToken
+            "token"=>$user->createToken("Api Token for $user->name")->plainTextToken
         ],
             "Account is created successfully"
         );
@@ -37,7 +37,7 @@ class UserAuthController extends Controller
 
         return $this->success([
             "user"=>$user,
-            "token"=>$user->createToken("Api Token of $user->name")->plainTextToken
+            "token"=>$user->createToken("Api Token for $user->name")->plainTextToken
         ], "Login Successfully");
     }
 

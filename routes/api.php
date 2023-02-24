@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\HomeQuestionController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/users/register", [UserAuthController::class,"register"]);

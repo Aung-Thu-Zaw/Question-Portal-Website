@@ -2,15 +2,7 @@
   <!-- Navbar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-10 font-playfair">
     <div
-      class="
-        flex
-        items-center
-        justify-between
-        px-5
-        py-3
-        bg-dark
-        border-b-2 border-b-slate-600
-      "
+      class="flex items-center justify-between px-5 py-3 bg-dark border-b-2 border-b-slate-600"
     >
       <!-- Logo -->
       <div
@@ -41,17 +33,7 @@
       <!-- Search Form -->
       <form action="">
         <div
-          class="
-            hidden
-            items-center
-            justify-between
-            p-3
-            bg-mid
-            border border-gray-400
-            rounded-xl
-            min-w-[100px]
-            md:w-[500px] md:flex
-          "
+          class="hidden items-center justify-between p-3 bg-mid border border-gray-400 rounded-xl min-w-[100px] md:w-[500px] md:flex"
         >
           <input
             type="text"
@@ -68,59 +50,29 @@
       <div class="flex items-center justify-evenly w-[150px] md:w-[170px]">
         <!-- Search Bar Mobile Button-->
         <div
-          class="
-            group
-            flex
-            items-center
-            justify-between
-            p-3
-            mr-3
-            bg-mid
-            rounded-3xl
-            md:hidden
-            hover:cursor-pointer hover:bg-gray-600
-            transition-all
-          "
+          class="group flex items-center justify-between p-3 mr-3 bg-mid rounded-3xl md:hidden hover:cursor-pointer hover:bg-gray-600 transition-all"
           @click="isSearchBoxHidden = !isSearchBoxHidden"
         >
           <i
-            class="
-              fa-solid fa-magnifying-glass
-              text-gray-700
-              group-hover:text-white
-            "
+            class="fa-solid fa-magnifying-glass text-gray-700 group-hover:text-white"
           ></i>
         </div>
 
         <div class="flex items-center justify-between w-full">
           <router-link
             :to="{ name: 'register' }"
-            class="
-              text-white
-              p-2
-              border
-              bg-slate-800
-              rounded-md
-              hover:bg-slate-900
-              mr-2
-            "
+            class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
           >
             Register
           </router-link>
           <router-link
             :to="{ name: 'login' }"
-            class="
-              text-white
-              p-2
-              border
-              bg-slate-800
-              rounded-md
-              hover:bg-slate-900
-              mr-2
-            "
+            class="text-white p-2 border bg-slate-800 rounded-md hover:bg-slate-900 mr-2"
           >
             Login
           </router-link>
+
+          <button type="submit" @click="handleLogout">Logout</button>
         </div>
         <!-- Notification Button -->
         <!-- <div
@@ -175,40 +127,14 @@
 
     <!-- Notification Box-->
     <div
-      class="
-        absolute
-        right-3
-        z-10
-        w-[350px]
-        h-[930px]
-        p-2
-        bg-white
-        rounded-lg
-        shadow-2xl
-        border-cyan-900
-        overflow-y-scroll
-        notification-scroll
-      "
+      class="absolute right-3 z-10 w-[350px] h-[930px] p-2 bg-white rounded-lg shadow-2xl border-cyan-900 overflow-y-scroll notification-scroll"
       :class="toggleNotificationBox"
     >
       <div class="flex items-center justify-between border-b-4 mb-3">
         <h1 class="text-xl text-dark font-bold pl-3 py-3">Notifications</h1>
         <span
           ref="close-btn"
-          class="
-            flex
-            items-center
-            justify-center
-            w-6
-            h-6
-            rounded-full
-            bg-gray-300
-            hover:bg-gray-500 hover:text-white
-            active:bg-gray-500
-            hover:cursor-pointer
-            transition-all
-            duration-100
-          "
+          class="flex items-center justify-center w-6 h-6 rounded-full bg-gray-300 hover:bg-gray-500 hover:text-white active:bg-gray-500 hover:cursor-pointer transition-all duration-100"
           @click="isNotificationBoxHidden = !isNotificationBoxHidden"
         >
           <i class="fa-solid fa-xmark"></i>
@@ -242,30 +168,11 @@
 
     <!-- Profile Box -->
     <div
-      class="
-        absolute
-        top-15
-        right-0
-        w-[150px]
-        h-auto
-        z-10
-        bg-white
-        rounded-md
-        shadow-lg
-        border-2 border-gray-300
-      "
+      class="absolute top-15 right-0 w-[150px] h-auto z-10 bg-white rounded-md shadow-lg border-2 border-gray-300"
       :class="toggleProfileBox"
     >
       <div
-        class="
-          py-2
-          px-4
-          w-full
-          text-sm
-          hover:bg-gray-400
-          transition-all
-          border-b-2
-        "
+        class="py-2 px-4 w-full text-sm hover:bg-gray-400 transition-all border-b-2"
       >
         <i class="fa-solid fa-id-card mr-3"></i>
         <span> Profile </span>
@@ -283,17 +190,7 @@
     >
       <form action="">
         <div
-          class="
-            flex
-            items-center
-            justify-between
-            p-3
-            bg-mid
-            border border-gray-400
-            rounded-xl
-            min-w-[100px]
-            md:w-[500px] md:flex
-          "
+          class="flex items-center justify-between p-3 bg-mid border border-gray-400 rounded-xl min-w-[100px] md:w-[500px] md:flex"
         >
           <input
             type="text"
@@ -315,19 +212,7 @@
       <div class="py-10 w-full">
         <a
           href="#"
-          class="
-            block
-            text-xl
-            w-full
-            p-2
-            px-5
-            border-2
-            rounded-md
-            shadow-md
-            bg-white
-            hover:bg-dark hover:text-white
-            transition-all
-          "
+          class="block text-xl w-full p-2 px-5 border-2 rounded-md shadow-md bg-white hover:bg-dark hover:text-white transition-all"
         >
           <i class="fa-solid fa-house mr-3"></i>
           Home
@@ -338,43 +223,19 @@
         <h1 class="text-3xl text-gray-400 tracking-wide mb-5 px-2">Public</h1>
 
         <div
-          class="
-            text-md
-            py-3
-            border-b-2
-            px-5
-            text-gray-700
-            hover:bg-dark hover:text-white
-            transition-all
-          "
+          class="text-md py-3 border-b-2 px-5 text-gray-700 hover:bg-dark hover:text-white transition-all"
         >
           <i class="fa-solid fa-question mr-3"></i>
           <span>Questions</span>
         </div>
         <div
-          class="
-            text-md
-            py-3
-            border-b-2
-            px-5
-            text-gray-700
-            hover:bg-dark hover:text-white
-            transition-all
-          "
+          class="text-md py-3 border-b-2 px-5 text-gray-700 hover:bg-dark hover:text-white transition-all"
         >
           <i class="fa-solid fa-tag mr-3"></i>
           <span>Tags</span>
         </div>
         <div
-          class="
-            text-md
-            py-3
-            border-b-2
-            px-5
-            text-gray-700
-            hover:bg-dark hover:text-white
-            transition-all
-          "
+          class="text-md py-3 border-b-2 px-5 text-gray-700 hover:bg-dark hover:text-white transition-all"
         >
           <i class="fa-solid fa-users mr-3"></i>
           <span>Users</span>
@@ -398,8 +259,6 @@
 
         <SingleYourDiscussionGroupCard />
       </div>
-
-      
     </div>
   </nav>
 </template>
@@ -409,6 +268,7 @@ import SingleYourQuestionGroupCard from "./SingleYourQuestionGroupCard.vue";
 import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
 import { ref } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   components: {
     SingleYourQuestionGroupCard,
@@ -416,6 +276,7 @@ export default {
   },
 
   setup() {
+    const store = useStore();
     const isNotificationBoxHidden = ref(true);
     const isProfileBoxHidden = ref(true);
     const isSearchBoxHidden = ref(true);
@@ -453,6 +314,10 @@ export default {
       };
     });
 
+    const handleLogout = async () => {
+      await store.dispatch("logout");
+    };
+
     return {
       isNotificationBoxHidden,
       isProfileBoxHidden,
@@ -465,6 +330,7 @@ export default {
       toggleMobileSearchInput,
       toggleHamburgerButton,
       toggleMobileMenu,
+      handleLogout,
     };
   },
 };

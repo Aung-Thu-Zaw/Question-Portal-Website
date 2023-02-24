@@ -31,7 +31,10 @@
         class="hidden md:block w-1/2"
       />
       <!-- Form Start -->
-      <form action="" method="POST" class="bg-white w-full md:px-5 md:w-1/2">
+      <form
+        @submit.prevent="handleLogin"
+        class="bg-white w-full md:px-5 md:w-1/2"
+      >
         <h1 class="text-center text-2xl text-dark mb-5 font-bold">
           Login With My Social Account
         </h1>
@@ -57,9 +60,16 @@
               class="px-2 w-full focus:outline-none placeholder:text-gray-400"
               placeholder="Enter your email"
               required
+              v-model="loginData.email"
             />
           </div>
-          <!-- <p class="text-center text-red-600">Email is required</p> -->
+          <p
+            v-for="message in validationErrors?.email"
+            :key="message.email"
+            class="text-center text-red-600 mt-3"
+          >
+            {{ message }}
+          </p>
         </div>
         <div class="mb-3">
           <label for="Name">Password</label>
@@ -83,9 +93,16 @@
               class="px-2 w-full focus:outline-none placeholder:text-gray-400"
               placeholder="Enter your password"
               required
+              v-model="loginData.password"
             />
           </div>
-          <!-- <p class="text-center text-red-600">Password is required</p> -->
+          <p
+            v-for="message in validationErrors?.password"
+            :key="message.password"
+            class="text-center text-red-600 mt-3"
+          >
+            {{ message }}
+          </p>
         </div>
 
         <div class="mb-5 flex items-center justify-between">
@@ -132,7 +149,45 @@
 </template>
 
  <script>
-export default {};
+import { useStore } from "vuex";
+import { reactive, ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+import { computed } from "@vue/runtime-core";
+export default {
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const loginData = reactive({
+      email: "",
+      password: "",
+    });
+
+    const handleLogin = async () => {
+      try {
+        const response = await store.dispatch("login", loginData);
+
+        if (!response) {
+          throw new Error("Response Not Found!");
+        }
+
+        return router.push("/");
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    const validationErrors = computed(() => {
+      return store.getters.getValidationErrors;
+    });
+
+    const user = computed(() => {
+      return store.getters.user;
+    });
+
+
+    return { loginData, handleLogin, validationErrors };
+  },
+};
 </script>
 
  <style>

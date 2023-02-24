@@ -35,7 +35,7 @@
             v-model="questionTitle"
           />
           <p
-            v-for="message in validationError?.question"
+            v-for="message in validationErrors?.question"
             :key="message.question"
             class="text-center text-red-600 mt-3"
           >
@@ -50,7 +50,7 @@
           </p>
           <v-md-editor v-model="problemDetail" height="400px" />
           <p
-            v-for="message in validationError?.problem_detail"
+            v-for="message in validationErrors?.problem_detail"
             :key="message.problem_detail"
             class="text-center text-red-600 mt-3"
           >
@@ -65,7 +65,7 @@
           </p>
           <v-md-editor v-model="expectAnswer" height="400px" />
           <p
-            v-for="message in validationError?.expect_answer"
+            v-for="message in validationErrors?.expect_answer"
             :key="message.expect_answer"
             class="text-center text-red-600 mt-3"
           >
@@ -119,7 +119,7 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-    const validationError = ref(null);
+    const validationErrors = ref(null);
     const questionTitle = ref("");
     const problemDetail = ref("");
     const expectAnswer = ref("");
@@ -139,7 +139,7 @@ export default {
         router.push("/questions");
       } catch (error) {
         if (error.response?.data) {
-          validationError.value = error.response.data.errors;
+          validationErrors.value = error.response.data.errors;
         }
 
         console.log(error.message);
@@ -151,7 +151,7 @@ export default {
       problemDetail,
       expectAnswer,
       addQuestion,
-      validationError,
+      validationErrors,
     };
   },
 };

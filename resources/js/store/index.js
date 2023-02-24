@@ -1,7 +1,10 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import questions from "./modules/questions";
 import tags from "./modules/tags";
 import users from "./modules/users";
+import auth from "./modules/auth";
+
 export default createStore({
     state: {},
     getters: {},
@@ -11,5 +14,12 @@ export default createStore({
         questions,
         tags,
         users,
+        auth,
     },
+    plugins: [
+        createPersistedState({
+            key: "user",
+            paths: ["auth"], // only persist the 'auth' module
+        }),
+    ],
 });
