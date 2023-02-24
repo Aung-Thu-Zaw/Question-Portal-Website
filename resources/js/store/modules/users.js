@@ -23,10 +23,12 @@ export default {
                 );
 
                 if (!response.data) {
-                    throw new Error("Response not found!");
+                    throw new Error("Response data not found!");
                 }
 
                 const paginateUsersData = response.data;
+
+                console.log(paginateUsersData);
 
                 commit("setPaginateUsers", paginateUsersData);
             } catch (error) {

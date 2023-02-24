@@ -4,14 +4,13 @@ export default {
     state: {
         user: null,
         token: null,
-        validationErrors: null,
     },
     getters: {
         getUser(state) {
             return state.user;
         },
-        getValidationErrors(state) {
-            return state.validationErrors;
+        getToken(state) {
+            return state.token;
         },
     },
     mutations: {
@@ -21,80 +20,50 @@ export default {
         setToken(state, token) {
             state.token = token;
         },
-        setValidationErrors(state, errors) {
-            state.validationErrors = errors;
-        },
     },
 
     actions: {
-        async register({ commit }, payload) {
-            try {
-                const response = await axios.post(
-                    `http://localhost:8000/api/users/register`,
-                    payload,
-                    {
-                        headers: {
-                            "content-type": "application/json",
-                        },
-                    }
-                );
-
-                if (!response.data) {
-                    throw new Error("Response not found!");
+        async register({ commit }, registerFormData) {
+            const response = await axios.post(
+                `http://localhost:8000/api/users/register`,
+                registerFormData,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
                 }
+            );
 
-                const token = response.data.data.token;
-                const user = response.data.data.user;
+            axios.defaults.headers.common[
+                "Authorization"
+            ] = `Bearer ${response.data.data.token}`;
 
-                axios.defaults.headers.common[
-                    "Authorization"
-                ] = `Bearer ${token}`;
+            commit("setToken", response.data.data.token);
+            commit("setUser", response.data.data.user);
 
-                commit("setToken", token);
-                commit("setUser", user);
-
-                console.log(token);
-
-                return response;
-            } catch (error) {
-                if (error.response?.data) {
-                    commit("setValidationErrors", error.response.data.errors);
-                }
-            }
+            return response;
         },
-        async login({ commit }, payload) {
-            try {
-                const response = await axios.post(
-                    `http://localhost:8000/api/users/login`,
-                    payload,
-                    {
-                        headers: {
-                            "content-type": "application/json",
-                        },
-                    }
-                );
 
-                if (!response.data) {
-                    throw new Error("Response not found!");
+        async login({ commit }, loginFormData) {
+            const response = await axios.post(
+                `http://localhost:8000/api/users/login`,
+                loginFormData,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
                 }
+            );
+            axios.defaults.headers.common[
+                "Authorization"
+            ] = `Bearer ${response.data.data.token}`;
 
-                const token = response.data.data.token;
-                const user = response.data.data.user;
+            commit("setUser", response.data.data.user);
+            commit("setToken", response.data.data.token);
 
-                axios.defaults.headers.common[
-                    "Authorization"
-                ] = `Bearer ${token}`;
-
-                commit("setUser", user);
-                commit("setToken", token);
-
-                return response;
-            } catch (error) {
-                if (error.response?.data) {
-                    commit("setValidationErrors", error.response.data.errors);
-                }
-            }
+            return response;
         },
+
         async logout({ state, commit }) {
             await axios.post(`http://localhost:8000/api/users/logout`, {
                 headers: {
@@ -104,28 +73,5 @@ export default {
             commit("setUser", null);
             commit("setToken", null);
         },
-        // async fetchUser({ commit }, payload) {
-        //     try {
-        //         const response = await axios.get(
-        //             `http://localhost:8000/api/users/${payload.id}`
-        //         );
-
-        //         if (!response.data) {
-        //             throw new Error("Response not found!");
-        //         }
-
-        //         const user = response.data.data;
-
-        //         console.log(user);
-
-        //         commit("setUser", user);
-
-        //         return response;
-        //     } catch (error) {
-        //         if (error.response?.data) {
-        //             commit("setValidationErrors", error.response.data.errors);
-        //         }
-        //     }
-        // },
     },
 };

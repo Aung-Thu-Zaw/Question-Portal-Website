@@ -27,7 +27,7 @@ export default {
         setSingleSpecificQuestion(state, singleSpecificQuestion) {
             state.singleSpecificQuestion = singleSpecificQuestion;
         },
-        setQuestion(state, newQuestion) {
+        setNewQuestion(state, newQuestion) {
             state.questions.unshift(newQuestion);
         },
     },
@@ -40,9 +40,8 @@ export default {
                 );
 
                 if (!response.data) {
-                    throw new Error("Response not found!");
+                    throw new Error("Response data not found!");
                 }
-
                 const questionData = response.data.data;
 
                 commit("setQuestions", questionData);
@@ -58,14 +57,14 @@ export default {
                 );
 
                 if (!response.data) {
-                    throw new Error("Response not found!");
+                    throw new Error("Response data not found!");
                 }
 
                 const paginateQuestionData = response.data;
 
                 commit("setPaginateQuestions", paginateQuestionData);
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         },
 
@@ -87,30 +86,19 @@ export default {
             }
         },
 
-        async createQuestion({ commit }, payload) {
-            try {
-                const response = await axios.post(
-                    `http://localhost:8000/api/questions`,
-                    payload,
-                    {
-                        headers: {
-                            "content-type": "application/json",
-                        },
-                    }
-                );
-
-                if (!response.data) {
-                    throw new Error("Response not found!");
+        async createQuestion({ commit }, questionFormData) {
+            const response = await axios.post(
+                `http://localhost:8000/api/questions`,
+                questionFormData,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
                 }
+            );
+            commit("setNewQuestion", response.data.data);
 
-                const createQuestionData = response.data.data;
-
-                commit("setQuestion", createQuestionData);
-
-                return response;
-            } catch (error) {
-                console.log(error.message);
-            }
+            return response;
         },
     },
 };

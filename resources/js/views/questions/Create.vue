@@ -21,7 +21,7 @@
           <li>Review your question and post it to the site.</li>
         </ul>
       </div>
-      <form @submit.prevent="addQuestion">
+      <form @submit.prevent="handleCreateQuestion">
         <div class="mb-5 p-5 border bg-white rounded-md shadow-sm">
           <h3 class="text-2xl font-semibold text-gray-700">Question Title *</h3>
           <p class="my-3 text-gray-500">
@@ -32,7 +32,7 @@
             class="border-2 p-3 w-full outline-none rounded-md"
             placeholder="Write Your Question?"
             required
-            v-model="questionTitle"
+            v-model="questionFormData.question"
           />
           <p
             v-for="message in validationErrors?.question"
@@ -48,7 +48,10 @@
           <p class="my-3 text-gray-500">
             What are the details of your problem?
           </p>
-          <v-md-editor v-model="problemDetail" height="400px" />
+          <v-md-editor
+            v-model="questionFormData.problem_detail"
+            height="400px"
+          />
           <p
             v-for="message in validationErrors?.problem_detail"
             :key="message.problem_detail"
@@ -63,7 +66,10 @@
           <p class="my-3 text-gray-500">
             What did you try and what would you expecting?
           </p>
-          <v-md-editor v-model="expectAnswer" height="400px" />
+          <v-md-editor
+            v-model="questionFormData.expect_answer"
+            height="400px"
+          />
           <p
             v-for="message in validationErrors?.expect_answer"
             :key="message.expect_answer"
@@ -90,17 +96,7 @@
 
         <div class="my-4 flex items-center justify-end">
           <button
-            class="
-              py-3
-              px-8
-              border
-              bg-blue-500
-              hover:bg-blue-700
-              text-white
-              transition-all
-              rounded-lg
-              font-bold
-            "
+            class="py-3 px-8 border bg-blue-500 hover:bg-blue-700 text-white transition-all rounded-lg font-bold"
           >
             Ask Question
           </button>
@@ -108,6 +104,7 @@
       </form>
     </div>
   </div>
+  {{ questionFormData }}
 </template>
 
 <script>
@@ -120,20 +117,21 @@ export default {
     const store = useStore();
     const router = useRouter();
     const validationErrors = ref(null);
-    const questionTitle = ref("");
-    const problemDetail = ref("");
-    const expectAnswer = ref("");
+    const questionFormData = reactive({
+      question: "",
+      problem_detail: "",
+      expect_answer: "",
+    });
 
-    const addQuestion = async () => {
+    const handleCreateQuestion = async () => {
       try {
-        const response = await store.dispatch("createQuestion", {
-          question: questionTitle.value,
-          problem_detail: problemDetail.value,
-          expect_answer: expectAnswer.value,
-        });
+        const response = await store.dispatch(
+          "createQuestion",
+          questionFormData
+        );
 
         if (!response) {
-          throw new Error("Data response not found!");
+          throw new Error("Response data not found!");
         }
 
         router.push("/questions");
@@ -141,16 +139,12 @@ export default {
         if (error.response?.data) {
           validationErrors.value = error.response.data.errors;
         }
-
-        console.log(error.message);
       }
     };
 
     return {
-      questionTitle,
-      problemDetail,
-      expectAnswer,
-      addQuestion,
+      questionFormData,
+      handleCreateQuestion,
       validationErrors,
     };
   },

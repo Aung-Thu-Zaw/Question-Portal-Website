@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap items-center justify-between">
     <div class="mb-5">
-      <form method="GET">
+      <form>
         <div class="filter-search-box">
           <input
             type="text"
@@ -59,7 +59,7 @@ import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { ref } from "@vue/reactivity";
-import { onMounted, onUnmounted, watch } from "@vue/runtime-core";
+import { onMounted, watch } from "@vue/runtime-core";
 export default {
   setup() {
     const store = useStore();
@@ -95,11 +95,18 @@ export default {
       }
     });
 
-    const filterTags = (filterBy = "newest") => {
-      store.dispatch("fetchTagsWithPagination", {
+    const filterTags = async (filterBy = "newest") => {
+      await store.dispatch("fetchTagsWithPagination", {
         page: page.value,
         globalSearch: globalSearch.value,
         filterBy,
+      });
+
+      router.push({
+        path: "/tags",
+        query: {
+          filter: filterBy,
+        },
       });
 
       if (route.query.search) {

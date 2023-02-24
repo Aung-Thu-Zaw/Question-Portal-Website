@@ -17,10 +17,8 @@ Route::post("/users/logout", [UserAuthController::class,"logout"])->middleware("
 
 Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("home");
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::apiResources([
-        'questions' => QuestionController::class,
-        'tags' => TagController::class,
-        'users' => UserController::class,
-    ]);
-});
+Route::apiResources([
+    'questions' => QuestionController::class,
+    'tags' => TagController::class,
+    'users' => UserController::class,
+]);

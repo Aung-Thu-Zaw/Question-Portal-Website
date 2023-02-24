@@ -4,15 +4,7 @@
       <div class="flex flex-col items-start justify-between mb-2">
         <a
           href="#"
-          class="
-            bg-slate-500
-            text-white
-            px-5
-            py-1
-            text-sm text-bold
-            rounded-sm
-            mb-3
-          "
+          class="bg-slate-500 text-white px-5 py-1 text-sm text-bold rounded-sm mb-3"
         >
           {{ tag.id }}
           {{ tag.name }}
@@ -68,11 +60,6 @@ export default {
             filter: route.query.filter ? route.query.filter : "newest",
           },
         });
-      } else {
-        router.replace({
-          path: "/tags",
-          query: {},
-        });
       }
 
       if (page != 1 && route.query.search) {
@@ -96,8 +83,10 @@ export default {
       }
     });
 
+    const tags = computed(() => store.getters.getPaginateTags);
+
     return {
-      tags: computed(() => store.getters.getPaginateTags),
+      tags,
       fetchTagsWithPagination,
     };
   },

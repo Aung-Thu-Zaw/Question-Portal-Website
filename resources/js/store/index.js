@@ -19,7 +19,7 @@ export default createStore({
     plugins: [
         createPersistedState({
             key: "user",
-            paths: ["auth"], // only persist the 'auth' module
+            paths: ["auth"],
         }),
     ],
 });

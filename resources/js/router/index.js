@@ -26,6 +26,9 @@ const routes = [
                 path: "questions",
                 name: "questions.index",
                 component: QuestionIndex,
+                // props: (route) => ({
+                //     filter: route.query.filter || "",
+                // }),
             },
             {
                 path: "questions/:id/:slug",

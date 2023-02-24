@@ -1,5 +1,4 @@
 <template>
-  <!-- Question Groups -->
   <div class="group-card-container">
     <div class="single-group-card">
       <h1 class="text-xl">Question Groups</h1>

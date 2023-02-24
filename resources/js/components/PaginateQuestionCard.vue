@@ -1,5 +1,4 @@
 <template>
-  <!-- Question Card -->
   <div
     v-for="question in questions.data"
     :key="question.id"
@@ -20,16 +19,7 @@
           </router-link>
         </h1>
         <span
-          class="
-            flex
-            items-center
-            justify-center
-            w-8
-            h-7
-            rounded-full
-            hover:text-gray-500 hover:cursor-pointer
-            transition-all
-          "
+          class="flex items-center justify-center w-8 h-7 rounded-full hover:text-gray-500 hover:cursor-pointer transition-all"
           @click="isMenuBoxHidden = !isMenuBoxHidden"
         >
           <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -37,18 +27,7 @@
       </div>
 
       <div
-        class="
-          absolute
-          top-12
-          right-0
-          flex-col
-          items-start
-          justify-between
-          border
-          shadow
-          bg-white
-          rounded-md
-        "
+        class="absolute top-12 right-0 flex-col items-start justify-between border shadow bg-white rounded-md"
         :class="toggleMenuBox"
       >
         <div
@@ -75,15 +54,7 @@
       </a>
     </div>
     <div
-      class="
-        flex
-        items-center
-        flex-wrap
-        justify-between
-        w-full
-        space-y-3
-        md:space-y-0
-      "
+      class="flex items-center flex-wrap justify-between w-full space-y-3 md:space-y-0"
     >
       <div class="flex items-center justify-center space-x-10">
         <span class="font-bold">3 Likes</span>
@@ -106,6 +77,7 @@
       </div>
     </div>
   </div>
+
   <div class="flex flex-wrap items-center justify-center">
     <TailwindPagination
       class="flex items-center"
@@ -123,13 +95,14 @@ import { TailwindPagination } from "laravel-vue-pagination";
 import { ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 export default {
   components: {
     TailwindPagination,
   },
   setup() {
     const store = useStore();
-
+    const route = useRoute();
     const isMenuBoxHidden = ref(true);
 
     const toggleMenuBox = computed(() => {
@@ -142,15 +115,17 @@ export default {
     const fetchQuestionsWithPagination = onMounted(async (page = 1) => {
       await store.dispatch("fetchQuestionsWithPagination", {
         page,
-        filterBy: "newest",
+        filterBy: route.query.filter ? route.query.filter : "newest",
       });
     });
+
+    const questions = computed(() => store.getters.getPaginateQuestions);
 
     return {
       isMenuBoxHidden,
       toggleMenuBox,
-      questions: computed(() => store.getters.getPaginateQuestions),
       fetchQuestionsWithPagination,
+      questions,
     };
   },
 };

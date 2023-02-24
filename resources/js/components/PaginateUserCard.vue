@@ -28,7 +28,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 import { TailwindPagination } from "laravel-vue-pagination";
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -56,11 +56,6 @@ export default {
             page,
             filter: route.query.filter ? route.query.filter : "newusers",
           },
-        });
-      } else {
-        router.replace({
-          path: "/users",
-          query: {},
         });
       }
 

@@ -1,5 +1,4 @@
 <template>
-  <!-- group card -->
   <div class="right-single-group-card">
     <div class="flex flex-wrap items-center justify-between w-full mb-3">
       <div class="flex items-center">

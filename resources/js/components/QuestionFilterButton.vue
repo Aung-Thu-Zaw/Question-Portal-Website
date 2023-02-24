@@ -68,8 +68,9 @@ export default {
     const router = useRouter();
     const store = useStore();
 
-    const filterQuestions = (filterBy = "newest") => {
-      store.dispatch("fetchQuestionsWithPagination", {
+    const filterQuestions = async (filterBy = "newest") => {
+      await store.dispatch("fetchQuestionsWithPagination", {
+        page: 1,
         filterBy,
       });
       router.push({

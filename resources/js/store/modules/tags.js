@@ -23,7 +23,7 @@ export default {
                 );
 
                 if (!response.data) {
-                    throw new Error("Response not found!");
+                    throw new Error("Response data not found!");
                 }
 
                 const paginateTagData = response.data;

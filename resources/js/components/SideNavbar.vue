@@ -2,20 +2,7 @@
   <div class="py-10 w-full">
     <router-link
       to="/"
-      class="
-        block
-        text-xl
-        w-full
-        p-2
-        px-5
-        border-2
-        rounded-md
-        shadow-md
-        text-gray-700
-        font-bold
-        hover:bg-dark hover:opacity-75 hover:text-white
-        transition-all
-      "
+      class="block text-xl w-full p-2 px-5 border-2 rounded-md shadow-md text-gray-700 font-bold hover:bg-dark hover:opacity-75 hover:text-white transition-all"
       :class="{ 'bg-dark text-white': route.path === '/' }"
     >
       <i class="fa-solid fa-house mr-3"></i>
@@ -28,14 +15,7 @@
 
     <router-link :to="{ name: 'questions.index' }">
       <div
-        class="
-          text-md
-          py-3
-          border-b-2
-          px-5
-          hover:bg-dark hover:opacity-75 hover:text-white
-          transition-all
-        "
+        class="text-md py-3 border-b-2 px-5 hover:bg-dark hover:opacity-75 hover:text-white transition-all"
         :class="{
           'bg-dark text-white': route.path === '/questions',
           'text-gray-700': route.path != '/questions',
@@ -48,14 +28,7 @@
 
     <router-link :to="{ name: 'tags.index' }">
       <div
-        class="
-          text-md
-          py-3
-          border-b-2
-          px-5
-          hover:bg-dark hover:opacity-75 hover:text-white
-          transition-all
-        "
+        class="text-md py-3 border-b-2 px-5 hover:bg-dark hover:opacity-75 hover:text-white transition-all"
         :class="{
           'bg-dark text-white': route.path === '/tags',
           'text-gray-700': route.path != '/tags',
@@ -68,14 +41,7 @@
 
     <router-link :to="{ name: 'users.index' }">
       <div
-        class="
-          text-md
-          py-3
-          border-b-2
-          px-5
-          hover:bg-dark hover:opacity-75 hover:text-white
-          transition-all
-        "
+        class="text-md py-3 border-b-2 px-5 hover:bg-dark hover:opacity-75 hover:text-white transition-all"
         :class="{
           'bg-dark text-white': route.path === '/users',
           'text-gray-700': route.path != '/users',
@@ -105,7 +71,9 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
 import SingleYourQuestionGroupCard from "./SingleYourQuestionGroupCard.vue";
 export default {
@@ -116,6 +84,8 @@ export default {
 
   setup() {
     const route = useRoute();
+    const isDisabled = ref(true);
+
     return { route };
   },
 };

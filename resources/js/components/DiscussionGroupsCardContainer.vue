@@ -1,5 +1,4 @@
 <template>
-  <!-- Discussion Groups -->
   <div class="group-card-container">
     <div class="single-group-card">
       <h1 class="text-xl">Disscussion Chat Groups</h1>
