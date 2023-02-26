@@ -12,18 +12,7 @@
         </h1>
         <router-link
           :to="{ name: 'questions.create' }"
-          class="
-            border
-            px-3
-            py-2
-            rounded-lg
-            bg-dark
-            text-white
-            md:px-5
-            hover:bg-gray-600
-            transition-all
-            block
-          "
+          class="border px-3 py-2 rounded-lg bg-dark text-white md:px-5 hover:bg-gray-600 transition-all block"
         >
           Ask Question
         </router-link>
@@ -48,6 +37,31 @@
         <div class="w-full p-5 bg-light border-r-2">
           <div v-html="problemDetailMarkdown" class="mb-5"></div>
           <div v-html="expectAnswerMarkdown" class="mb-5"></div>
+
+          <hr />
+
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-2xl">10 Answers</h3>
+              <form>
+                <select
+                  name=""
+                  id=""
+                  class="border-2 border-slate-400 w-[300px] outline-none px-3 py-1 bg-white rounded-md"
+                >
+                  <option value="" selected disabled>Sort By</option>
+                  <option value="">Oldest</option>
+                  <option value="">Newest</option>
+                </select>
+              </form>
+            </div>
+
+            <SingleAnswer />
+
+            <hr />
+
+            <AnswerForm />
+          </div>
         </div>
 
         <div class="bg-light w-full xl:w-[40%]">
@@ -59,6 +73,8 @@
 </template>
 
 <script>
+import SingleAnswer from "../../components/SingleAnswer.vue";
+import AnswerForm from "../../components/AnswerForm.vue";
 import hljs from "highlight.js";
 import "highlight.js/styles/tokyo-night-dark.css";
 import highlight from "highlight.js";
@@ -71,6 +87,8 @@ import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: {
+    SingleAnswer,
+    AnswerForm,
     RelatedQuestions,
     LeftSide,
   },
