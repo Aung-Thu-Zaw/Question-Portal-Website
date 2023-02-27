@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\Auth\UserAuthController;
 use App\Http\Controllers\Api\HomeQuestionController;
 use App\Http\Controllers\Api\QuestionController;
@@ -19,6 +20,7 @@ Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("
 
 Route::apiResources([
     'questions' => QuestionController::class,
+    'answers'=>AnswerController::class,
     'tags' => TagController::class,
     'users' => UserController::class,
 ]);

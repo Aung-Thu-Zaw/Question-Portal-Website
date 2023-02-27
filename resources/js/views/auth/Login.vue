@@ -112,8 +112,8 @@
 
  <script>
 import { useStore } from "vuex";
-import { reactive, ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import { reactive, ref } from "@vue/reactivity";
 export default {
   setup() {
     const store = useStore();

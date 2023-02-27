@@ -52,8 +52,8 @@
       class="flex items-center flex-wrap justify-between w-full space-y-3 md:space-y-0"
     >
       <div class="flex items-center justify-center space-x-10">
-        <span class="font-bold">3 Likes</span>
-        <span class="font-bold">2 Answers</span>
+        <span class="font-bold">{{ question.like }} Likes</span>
+        <span class="font-bold">{{ question.total_answer }} Answers</span>
         <span class="font-bold">{{ question.view }} Views</span>
       </div>
       <div class="flex items-center justify-center">
@@ -64,7 +64,7 @@
             class="w-8 h-8 rounded-full object-cover object-center mr-3"
           />
           <a href="#" class="text-sm font-bold text-blue-500 hover:underline">
-            Aung Thu Zaw
+            {{ question.user }}
           </a>
         </div>
         <span class="text-gray-500 mr-2">asked</span>

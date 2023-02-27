@@ -17,11 +17,36 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            "question"=>$this->faker->sentence(),
-            "problem_detail"=>$this->faker->paragraph(5),
-            "expect_answer"=>$this->faker->paragraph(5),
-            "view"=>$this->faker->randomNumber(),
-            "created_at"=>$this->faker->dateTimeBetween("-2 months", now())
+            "user_id"=>fake()->numberBetween(1, 5),
+            "question"=>fake()->sentence(),
+            "problem_detail"=>"Say I have a Vue instance like so:
+
+            new Vue({
+                el: '#app',
+
+                data: {
+                    word: 'foo',
+                },
+
+                filters: {
+                   capitalize: function(text) {
+                       return text.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+                   }
+                },
+
+                methods: {
+                    sendData: function() {
+                        var payload = this.filters.capitalize(this.word); // how?
+                    }
+                }
+            }",
+            "expect_answer"=>"I can easily use the filter in a template like so:
+
+            <span>The word is {{ word | capitalize }}</span>
+           ",
+            "view"=>fake()->randomNumber(),
+            "like"=>fake()->randomNumber(),
+            "created_at"=>fake()->dateTimeBetween("-2 months", now())
         ];
     }
 }

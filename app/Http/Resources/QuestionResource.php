@@ -21,11 +21,15 @@ class QuestionResource extends JsonResource
              "problem_detail"=>$this->problem_detail,
              "expect_answer"=>$this->expect_answer,
              "view"=>$this->view,
-             "tags"=>TagResource::collection($this->tags),
+             "like"=>$this->like,
              "created_date"=>$this->created_at->toDateString(),
              "created_time"=>$this->created_at->diffForHumans(),
              "updated_date"=>$this->updated_at->toDateString(),
-
+             "updated_time"=>$this->updated_at->diffForHumans(),
+             "user"=>$this->user->name,
+             "total_answer"=>$this->answers->count(),
+             "answers"=>AnswerResource::collection($this->answers),
+             "tags"=>TagResource::collection($this->tags),
          ];
     }
 }

@@ -17,8 +17,15 @@ class UserResource extends JsonResource
         return [
             "id"=>$this->id,
             "name"=>$this->name,
-            // "avatar"=>$this->avatar,
-
+            // "email"=>$this->email,
+            // "avatar"=>$this->profile->avatar,
+            // "title"=>$this->profile->title,
+            // "about"=>$this->profile->about,
+            // "website_link"=>$this->profile->website_link,
+            // "twitter_link"=>$this->profile->twitter_link,
+            // "github_link"=>$this->profile->github_link,
+            // "location"=>$this->profile->location,
+            // "created_data"=>$this->created_at->toDateString()
         ];
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex w-full min-h-screen bg-light mt-20">
+  <div v-if="question" class="relative flex w-full min-h-screen bg-light mt-20">
     <!-- Left Side -->
     <LeftSide />
 
@@ -21,11 +21,11 @@
       <div class="flex items-center border-b py-3">
         <span class="text-sm mr-10">
           <span class="text-gray-400 mr-1">Asked</span>
-          Today
+          {{ question.created_time }}
         </span>
         <span class="text-sm mr-10">
           <span class="text-gray-400 mr-1">Modified</span>
-          Today
+          {{ question.updated_time }}
         </span>
         <span class="text-sm mr-10">
           <span class="text-gray-400 mr-1">Viewed</span>
@@ -34,33 +34,32 @@
       </div>
 
       <div class="flex flex-col w-full px-5 bg-light xl:flex-row">
-        <div class="w-full p-5 bg-light border-r-2">
+        <div class="p-5 bg-light border-r-2 w-full">
           <div v-html="problemDetailMarkdown" class="mb-5"></div>
+          <br />
           <div v-html="expectAnswerMarkdown" class="mb-5"></div>
-
           <hr />
 
           <div>
-            <div class="flex items-center justify-between">
-              <h3 class="text-2xl">10 Answers</h3>
-              <form>
-                <select
-                  name=""
-                  id=""
-                  class="border-2 border-slate-400 w-[300px] outline-none px-3 py-1 bg-white rounded-md"
-                >
-                  <option value="" selected disabled>Sort By</option>
-                  <option value="">Oldest</option>
-                  <option value="">Newest</option>
-                </select>
-              </form>
+            <div v-if="answers">
+              <div class="flex items-center justify-between">
+                <h3 class="text-2xl">Answers ({{ answers.length }})</h3>
+                <form>
+                  <select
+                    name=""
+                    id=""
+                    class="border-2 border-slate-400 w-[300px] outline-none px-3 py-1 bg-white rounded-md"
+                  >
+                    <option value="" selected disabled>Sort By</option>
+                    <option value="">Oldest</option>
+                    <option value="">Newest</option>
+                  </select>
+                </form>
+              </div>
+              <SingleAnswer :answers="answers" />
             </div>
 
-            <SingleAnswer />
-
-            <hr />
-
-            <AnswerForm />
+            <AnswerForm :id="question.id" />
           </div>
         </div>
 
@@ -73,33 +72,29 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { computed, onMounted } from "@vue/runtime-core";
 import SingleAnswer from "../../components/SingleAnswer.vue";
 import AnswerForm from "../../components/AnswerForm.vue";
-import hljs from "highlight.js";
-import "highlight.js/styles/tokyo-night-dark.css";
-import highlight from "highlight.js";
-import { marked } from "marked";
-import { useStore } from "vuex";
 import RelatedQuestions from "../../components/RelatedQuestions.vue";
 import LeftSide from "../../components/LeftSide.vue";
-import { computed, onMounted, ref } from "@vue/runtime-core";
-import { useRoute, useRouter } from "vue-router";
+import { marked } from "marked";
+import highlight from "highlight.js";
+import hljs from "highlight.js";
+import "highlight.js/styles/tokyo-night-dark.css";
 
 export default {
+  props: ["id", "slug"],
   components: {
     SingleAnswer,
     AnswerForm,
     RelatedQuestions,
     LeftSide,
   },
-  props: ["id", "slug"],
 
   setup(props) {
     const store = useStore();
-    const route = useRoute();
-    const router = useRouter();
 
-    console.log(highlight);
     onMounted(async () => {
       await store.dispatch("fetchSingleSpecificQuestion", props.id);
       hljs.initHighlightingOnLoad();
@@ -107,6 +102,14 @@ export default {
 
     const question = computed(() => {
       return store.getters.getSingleSpecificQuestion;
+    });
+
+    const answers = computed(() => {
+      if (question.value && question.value.answers) {
+        return question.value.answers;
+      }
+
+      return "";
     });
 
     const problemDetailMarkdown = computed(() => {
@@ -119,6 +122,7 @@ export default {
       }
       return "";
     });
+
     const expectAnswerMarkdown = computed(() => {
       if (question.value && question.value.expect_answer) {
         return marked(question.value.expect_answer, {
@@ -132,6 +136,7 @@ export default {
 
     return {
       question,
+      answers,
       problemDetailMarkdown,
       expectAnswerMarkdown,
     };
@@ -142,5 +147,8 @@ export default {
 <style>
 pre {
   font-size: 0.8rem;
+}
+code {
+  border-radius: 8px;
 }
 </style>

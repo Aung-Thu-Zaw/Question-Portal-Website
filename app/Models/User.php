@@ -60,6 +60,16 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
+    public function questions()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
     public function toSearchableArray()
     {
         return [

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Answer>
  */
-class TagFactory extends Factory
+class AnswerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,9 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            "name"=>fake()->word(),
-            "created_at"=> fake()->dateTimeBetween("-10minutes", now()),
+            "user_id"=>fake()->numberBetween(1, 5),
+            "question_id"=>fake()->numberBetween(1, 10),
+            "answer"=>fake()->paragraph()
         ];
     }
 }

@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import questions from "./modules/questions";
+import answers from "./modules/answers";
 import tags from "./modules/tags";
 import users from "./modules/users";
 import auth from "./modules/auth";
@@ -12,6 +13,7 @@ export default createStore({
     actions: {},
     modules: {
         questions,
+        answers,
         tags,
         users,
         auth,

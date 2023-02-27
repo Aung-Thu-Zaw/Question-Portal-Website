@@ -27,6 +27,8 @@
           <p class="my-3 text-gray-500">
             Be specific and imagine you're asking a question to another person.
           </p>
+
+          <input type="hidden" v-model="questionFormData.user_id" />
           <input
             type="text"
             class="border-2 p-3 w-full outline-none rounded-md"
@@ -111,13 +113,20 @@
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { computed } from "vue";
 
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
     const validationErrors = ref(null);
+
+    const user = computed(() => {
+      return store.getters.getUser;
+    });
+
     const questionFormData = reactive({
+      user_id: user.value.id ? user.value.id : null,
       question: "",
       problem_detail: "",
       expect_answer: "",

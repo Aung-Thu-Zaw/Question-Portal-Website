@@ -12,14 +12,8 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-            $table->string("question");
-            $table->text("problem_detail");
-            $table->text("expect_answer");
-            $table->integer("view")->default(0);
-            $table->integer("like")->default(0);
-            $table->timestamps();
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreignId("user_id")->after("id")->constrained()->cascadeOnDelete();
         });
     }
 
@@ -30,6 +24,8 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->dropConstrainedForeignId("user_id");
+        });
     }
 };
