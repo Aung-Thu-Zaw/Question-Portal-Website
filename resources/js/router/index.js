@@ -28,9 +28,6 @@ const routes = [
                 path: "questions",
                 name: "questions.index",
                 component: QuestionIndex,
-                // props: (route) => ({
-                //     filter: route.query.filter || "",
-                // }),
             },
             {
                 path: "questions/:id/:slug",
@@ -42,6 +39,13 @@ const routes = [
                 path: "questions/ask",
                 name: "questions.create",
                 component: QuestionCreate,
+                beforeEnter(to, from, next) {
+                    if (!store.getters.getUser) {
+                        next({ name: "login" });
+                    } else {
+                        next();
+                    }
+                },
             },
             {
                 path: "questions/:id/edit",

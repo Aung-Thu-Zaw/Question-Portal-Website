@@ -53,25 +53,27 @@
     </router-link>
   </div>
 
-  <!-- Question Groups -->
-  <div class="py-3 mb-3">
-    <h1 class="text-xl text-gray-400 tracking-wide mb-3 px-2">
-      Your Question Groups
-    </h1>
-    <SingleYourQuestionGroupCard />
-  </div>
+  <div v-if="user">
+    <!-- Question Groups -->
+    <div class="py-3 mb-3">
+      <h1 class="text-xl text-gray-400 tracking-wide mb-3 px-2">
+        Your Question Groups
+      </h1>
+      <SingleYourQuestionGroupCard />
+    </div>
 
-  <!-- Disscussion Groups -->
-  <div class="py-3 mb-3">
-    <h1 class="text-xl text-gray-400 tracking-wide mb-3 px-2">
-      Your Disscussion Chat Groups
-    </h1>
-    <SingleYourDiscussionGroupCard />
+    <!-- Disscussion Groups -->
+    <div class="py-3 mb-3">
+      <h1 class="text-xl text-gray-400 tracking-wide mb-3 px-2">
+        Your Disscussion Chat Groups
+      </h1>
+      <SingleYourDiscussionGroupCard />
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import SingleYourDiscussionGroupCard from "./SingleYourDiscussionGroupCard.vue";
@@ -83,10 +85,12 @@ export default {
   },
 
   setup() {
+    const store = useStore();
     const route = useRoute();
-    const isDisabled = ref(true);
 
-    return { route };
+    const user = computed(() => store.state.getUser);
+
+    return { route, user };
   },
 };
 </script>

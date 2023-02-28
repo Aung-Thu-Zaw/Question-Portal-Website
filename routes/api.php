@@ -8,19 +8,42 @@ use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
+// User Authentication
 Route::post("/users/register", [UserAuthController::class,"register"]);
 Route::post("/users/login", [UserAuthController::class,"login"]);
-Route::post("/users/logout", [UserAuthController::class,"logout"])->middleware("auth:sanctum");
+
+// Home
+Route::get("/latest-questions", [HomeQuestionController::class,"index"]);
+
+// Question Section
+Route::get("/questions", [QuestionController::class,"index"]);
+Route::get("/questions/{question}", [QuestionController::class,"show"]);
+
+// Answer Section
+Route::get("/answers", [AnswerController::class,"index"]);
+
+// Tag Section
+Route::get("/tags", [TagController::class,"index"]);
+
+// User Section
+Route::get("/users", [UserController::class,"index"]);
+Route::get("/users/{user}", [UserController::class,"show"]);
+
+// Sections with middleware
+Route::middleware("auth:sanctum")->group(function () {
+    Route::post("questions", [QuestionController::class,"store"]);
+    Route::post("answers", [AnswerController::class,"store"]);
+    Route::post("/users/logout", [UserAuthController::class,"logout"]);
+});
 
 
 
 
 
-Route::get("/latest-questions", [HomeQuestionController::class,"index"])->name("home");
 
-Route::apiResources([
-    'questions' => QuestionController::class,
-    'answers'=>AnswerController::class,
-    'tags' => TagController::class,
-    'users' => UserController::class,
-]);
+// Route::apiResources([
+//     'questions' => QuestionController::class,
+//     'answers'=>AnswerController::class,
+//     'tags' => TagController::class,
+//     'users' => UserController::class,
+// ]);

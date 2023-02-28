@@ -78,8 +78,6 @@ export default {
     const answers = props.answers;
     const answerMarkdowns = reactive([]);
 
-    console.log(answers);
-
     onMounted(() => {
       hljs.initHighlightingOnLoad();
     });

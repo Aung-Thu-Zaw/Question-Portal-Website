@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user">
     <h3 class="text-2xl">Write Your Answer</h3>
     <form @submit.prevent="handleCreateAnswer">
       <v-md-editor height="400px" v-model="answerFormData.answer" />
@@ -21,6 +21,20 @@
       {{ answerFormData }}
     </form>
   </div>
+  <div v-else>
+    <h3 class="text-2xl text-center">
+      If you are participating in the discussion of this question, please
+      <router-link
+        :to="{ name: 'register' }"
+        class="text-blue-500 hover:underline"
+        >Register</router-link
+      >
+      or
+      <router-link :to="{ name: 'login' }" class="text-blue-500 hover:underline"
+        >Login</router-link
+      >
+    </h3>
+  </div>
 </template>
 
 <script>
@@ -40,16 +54,18 @@ export default {
     const user = computed(() => {
       return store.getters.getUser;
     });
-
     const answerFormData = reactive({
-      user_id: user.value.id ? user.value.id : "",
+      user_id: user.value ? user.value.id : "",
       question_id: props.id ? props.id : "",
       answer: "",
     });
 
     const handleCreateAnswer = async () => {
       try {
-        const response = await store.dispatch("createAnswer", answerFormData);
+        const response = await store.dispatch("createAnswer", {
+          answerFormData,
+          token: store.getters.getToken,
+        });
 
         if (!response) {
           throw new Error("Response data not found!");
@@ -63,7 +79,10 @@ export default {
       }
     };
 
+    console.log(user.value);
+
     return {
+      user,
       answerFormData,
       handleCreateAnswer,
       validationErrors,

@@ -86,13 +86,14 @@ export default {
             }
         },
 
-        async createQuestion({ commit }, questionFormData) {
+        async createQuestion({ commit }, payload) {
             const response = await axios.post(
                 `http://localhost:8000/api/questions`,
-                questionFormData,
+                payload.questionFormData,
                 {
                     headers: {
                         "content-type": "application/json",
+                        Authorization: `Bearer ${payload.token}`,
                     },
                 }
             );

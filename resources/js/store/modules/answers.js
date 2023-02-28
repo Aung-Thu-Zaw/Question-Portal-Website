@@ -12,13 +12,14 @@ export default {
     },
 
     actions: {
-        async createAnswer({ commit }, answerFormData) {
+        async createAnswer({ commit }, payload) {
             const response = await axios.post(
                 `http://localhost:8000/api/answers`,
-                answerFormData,
+                payload.answerFormData,
                 {
                     headers: {
                         "content-type": "application/json",
+                        Authorization: `Bearer ${payload.token}`,
                     },
                 }
             );

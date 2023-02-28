@@ -18,29 +18,6 @@
             {{ question.question }}
           </router-link>
         </h1>
-        <span
-          class="flex items-center justify-center w-8 h-7 rounded-full hover:text-gray-500 hover:cursor-pointer transition-all"
-          @click="isMenuBoxHidden = !isMenuBoxHidden"
-        >
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-        </span>
-      </div>
-
-      <div
-        class="absolute top-12 right-0 flex-col items-start justify-between border shadow bg-white rounded-md"
-        :class="toggleMenuBox"
-      >
-        <div
-          class="py-2 px-4 w-full hover:bg-gray-400 transition-all border-b-2"
-        >
-          <i class="fa-solid fa-share mr-3"></i>
-          <span> Share </span>
-        </div>
-
-        <div class="py-2 px-4 w-full hover:bg-gray-400 transition-all">
-          <i class="fa-solid fa-bookmark mr-3"></i>
-          <span> Save To Bookmark </span>
-        </div>
       </div>
     </div>
     <div class="flex items-center flex-wrap w-full">
@@ -103,14 +80,6 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
-    const isMenuBoxHidden = ref(true);
-
-    const toggleMenuBox = computed(() => {
-      return {
-        hidden: isMenuBoxHidden.value == true,
-        flex: isMenuBoxHidden.value == false,
-      };
-    });
 
     const fetchQuestionsWithPagination = onMounted(async (page = 1) => {
       await store.dispatch("fetchQuestionsWithPagination", {
@@ -122,8 +91,6 @@ export default {
     const questions = computed(() => store.getters.getPaginateQuestions);
 
     return {
-      isMenuBoxHidden,
-      toggleMenuBox,
       fetchQuestionsWithPagination,
       questions,
     };

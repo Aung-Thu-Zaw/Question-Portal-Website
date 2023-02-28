@@ -134,10 +134,10 @@ export default {
 
     const handleCreateQuestion = async () => {
       try {
-        const response = await store.dispatch(
-          "createQuestion",
-          questionFormData
-        );
+        const response = await store.dispatch("createQuestion", {
+          questionFormData,
+          token: store.getters.getToken,
+        });
 
         if (!response) {
           throw new Error("Response data not found!");

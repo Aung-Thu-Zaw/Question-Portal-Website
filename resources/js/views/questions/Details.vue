@@ -1,6 +1,5 @@
 <template>
   <div v-if="question" class="relative flex w-full min-h-screen bg-light mt-20">
-    <!-- Left Side -->
     <LeftSide />
 
     <div class="w-full p-5 bg-light border-l-2 border-r-2">
@@ -59,7 +58,7 @@
               <SingleAnswer :answers="answers" />
             </div>
 
-            <AnswerForm :id="question.id" />
+            <AnswerForm :id="id" />
           </div>
         </div>
 
@@ -68,6 +67,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div v-else class="w-full min-h-screen flex items-center justify-center">
+    <img src="../../assets/images/loading.gif" alt="" />
   </div>
 </template>
 
@@ -93,10 +95,11 @@ export default {
   },
 
   setup(props) {
+    const id = props.id;
     const store = useStore();
 
     onMounted(async () => {
-      await store.dispatch("fetchSingleSpecificQuestion", props.id);
+      await store.dispatch("fetchSingleSpecificQuestion", id);
       hljs.initHighlightingOnLoad();
     });
 
@@ -135,6 +138,7 @@ export default {
     });
 
     return {
+      id,
       question,
       answers,
       problemDetailMarkdown,
