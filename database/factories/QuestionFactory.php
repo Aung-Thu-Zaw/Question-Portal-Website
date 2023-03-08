@@ -40,8 +40,7 @@ class QuestionFactory extends Factory
                     }
                 }
             }",
-            "expect_answer"=>"I can easily use the filter in a template like so:
-
+            "expect_answer"=>"
             <span>The word is {{ word | capitalize }}</span>
            ",
             "view"=>fake()->randomNumber(),

@@ -66,45 +66,47 @@
 </template>
 
 <script>
-import hljs from "highlight.js";
-import "highlight.js/styles/tokyo-night-dark.css";
-import highlight from "highlight.js";
+import { computed, onMounted, reactive, ref } from "vue";
+import { useStore } from "vuex";
 import { marked } from "marked";
-import { computed, onMounted, reactive } from "vue";
+import hljs from "highlight.js";
+import highlight from "highlight.js";
+import "highlight.js/styles/tokyo-night-dark.css";
 
 export default {
-  props: ["answers"],
-  setup(props) {
-    const answers = props.answers;
+  setup() {
+    const store = useStore();
     const answerMarkdowns = reactive([]);
 
-    onMounted(() => {
-      hljs.initHighlightingOnLoad();
-    });
+    const answers = ref(null);
 
-    if (answers) {
-      answers.forEach((answer) => {
-        const markdown = computed(() => {
-          if (answer) {
-            return {
-              id: answer.id,
-              answer: marked(answer.answer, {
-                highlight(md) {
-                  return highlight.highlightAuto(md).value;
-                },
-              }),
-              created_time: answer.created_time,
-              created_date: answer.created_date,
-              user: answer.user,
-            };
-          }
+    setTimeout(() => {
+      answers.value = store.getters.getAnswers;
 
-          return "";
+      if (answers.value) {
+        answers.value.forEach((answer) => {
+          const markdown = computed(() => {
+            // hljs.highlightBlock(answer);
+            if (answer) {
+              return {
+                id: answer.id,
+                answer: marked(answer.answer, {
+                  highlight(md) {
+                    return highlight.highlightAuto(md).value;
+                  },
+                }),
+                created_time: answer.created_time,
+                created_date: answer.created_date,
+                user: answer.user,
+              };
+            }
+            return "";
+          });
+
+          answerMarkdowns.push(markdown.value);
         });
-
-        answerMarkdowns.push(markdown.value);
-      });
-    }
+      }
+    }, 50);
 
     return { answerMarkdowns };
   },
@@ -112,4 +114,11 @@ export default {
 </script>
 
 <style>
+pre {
+  font-size: 0.8rem;
+  background: #1a1b26;
+  padding: 12.8px;
+  color: #9aa5ce;
+  border-radius: 8px;
+}
 </style>

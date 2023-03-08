@@ -19,7 +19,28 @@ class AnswerFactory extends Factory
         return [
             "user_id"=>fake()->numberBetween(1, 5),
             "question_id"=>fake()->numberBetween(1, 10),
-            "answer"=>fake()->paragraph()
+            "answer"=>"
+            new Vue({
+                el: '#app',
+
+                data: {
+                    word: 'foo',
+                },
+
+                filters: {
+                   capitalize: function(text) {
+                       return text.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+                   }
+                },
+
+                methods: {
+                    sendData: function() {
+                        var payload = this.filters.capitalize(this.word); // how?
+                    }
+                }
+            }
+            "
+
         ];
     }
 }

@@ -28,7 +28,6 @@ class QuestionResource extends JsonResource
              "updated_time"=>$this->updated_at->diffForHumans(),
              "user"=>$this->user->name,
              "total_answer"=>$this->answers->count(),
-             "answers"=>AnswerResource::collection($this->answers),
              "tags"=>TagResource::collection($this->tags),
          ];
     }

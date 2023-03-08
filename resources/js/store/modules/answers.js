@@ -4,14 +4,37 @@ export default {
     state: {
         answers: [],
     },
-    getters: {},
+    getters: {
+        getAnswers(state) {
+            return state.answers;
+        },
+    },
     mutations: {
+        setAnswers(state, answers) {
+            state.answers = answers;
+        },
         setNewAnswer(state, newAnswer) {
             state.answers.unshift(newAnswer);
         },
     },
 
     actions: {
+        async fetchAllAnswers({ commit }, questionId) {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/answers/${questionId}`
+                );
+
+                if (!response.data) {
+                    throw new Error("Response data not found!");
+                }
+                const answerData = response.data.data;
+
+                commit("setAnswers", answerData);
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
         async createAnswer({ commit }, payload) {
             const response = await axios.post(
                 `http://localhost:8000/api/answers`,

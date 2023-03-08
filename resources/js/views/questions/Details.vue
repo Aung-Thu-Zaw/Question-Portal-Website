@@ -40,9 +40,9 @@
           <hr />
 
           <div>
-            <div v-if="answers">
+            <div>
               <div class="flex items-center justify-between">
-                <h3 class="text-2xl">Answers ({{ answers.length }})</h3>
+                <h3 class="text-2xl">Answers ({{ question.total_answer }})</h3>
                 <form>
                   <select
                     name=""
@@ -55,10 +55,10 @@
                   </select>
                 </form>
               </div>
-              <SingleAnswer :answers="answers" />
+              <SingleAnswer />
             </div>
 
-            <AnswerForm :id="id" />
+            <AnswerForm />
           </div>
         </div>
 
@@ -75,14 +75,13 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import SingleAnswer from "../../components/SingleAnswer.vue";
 import AnswerForm from "../../components/AnswerForm.vue";
 import RelatedQuestions from "../../components/RelatedQuestions.vue";
 import LeftSide from "../../components/LeftSide.vue";
 import { marked } from "marked";
 import highlight from "highlight.js";
-import hljs from "highlight.js";
 import "highlight.js/styles/tokyo-night-dark.css";
 
 export default {
@@ -95,25 +94,18 @@ export default {
   },
 
   setup(props) {
-    const id = props.id;
     const store = useStore();
 
     onMounted(async () => {
-      await store.dispatch("fetchSingleSpecificQuestion", id);
-      hljs.initHighlightingOnLoad();
+      await store.dispatch("fetchSingleSpecificQuestion", props.id);
+      await store.dispatch("fetchAllAnswers", props.id);
     });
 
-    const question = computed(() => {
-      return store.getters.getSingleSpecificQuestion;
-    });
+    const question = ref(null);
 
-    const answers = computed(() => {
-      if (question.value && question.value.answers) {
-        return question.value.answers;
-      }
-
-      return "";
-    });
+    setTimeout(() => {
+      question.value = store.getters.getSingleSpecificQuestion;
+    }, 300);
 
     const problemDetailMarkdown = computed(() => {
       if (question.value && question.value.problem_detail) {
@@ -138,9 +130,7 @@ export default {
     });
 
     return {
-      id,
       question,
-      answers,
       problemDetailMarkdown,
       expectAnswerMarkdown,
     };
@@ -148,7 +138,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 pre {
   font-size: 0.8rem;
 }
