@@ -9,9 +9,9 @@ use App\Models\Answer;
 
 class AnswerController extends Controller
 {
-    public function index($questionId)
+    public function index()
     {
-        $answers=Answer::where("question_id", $questionId)->orderBy("id", "desc")->get();
+        $answers=Answer::orderBy("id", "desc")->get();
         return AnswerResource::collection($answers);
     }
 

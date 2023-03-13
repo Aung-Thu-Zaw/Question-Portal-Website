@@ -20,7 +20,7 @@ Route::get("/questions", [QuestionController::class,"index"]);
 Route::get("/questions/{question}", [QuestionController::class,"show"]);
 
 // Answer Section
-Route::get("/answers/{question_id}", [AnswerController::class,"index"]);
+Route::get("/answers", [AnswerController::class,"index"]);
 
 // Tag Section
 Route::get("/tags", [TagController::class,"index"]);

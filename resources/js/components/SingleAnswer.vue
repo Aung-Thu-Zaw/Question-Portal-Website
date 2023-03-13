@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { marked } from "marked";
 import hljs from "highlight.js";
@@ -78,35 +78,40 @@ export default {
     const store = useStore();
     const answerMarkdowns = reactive([]);
 
-    const answers = ref(null);
+    const question = computed(() => store.getters.getSingleSpecificQuestion);
 
-    setTimeout(() => {
-      answers.value = store.getters.getAnswers;
+    const answers = computed(() =>
+      store.getters.getAnswersByQuestionId(question.value.id)
+    );
 
+    const updateAnswerMarkdowns = () => {
+      answerMarkdowns.length = 0;
       if (answers.value) {
         answers.value.forEach((answer) => {
-          const markdown = computed(() => {
-            // hljs.highlightBlock(answer);
-            if (answer) {
-              return {
-                id: answer.id,
-                answer: marked(answer.answer, {
-                  highlight(md) {
-                    return highlight.highlightAuto(md).value;
-                  },
-                }),
-                created_time: answer.created_time,
-                created_date: answer.created_date,
-                user: answer.user,
-              };
-            }
-            return "";
-          });
-
-          answerMarkdowns.push(markdown.value);
+          const markdown = {
+            id: answer.id,
+            question_id: answer.question_id,
+            answer: marked(answer.answer, {
+              highlight(md) {
+                return highlight.highlightAuto(md).value;
+              },
+            }),
+            created_time: answer.created_time,
+            created_date: answer.created_date,
+            user: answer.user,
+          };
+          answerMarkdowns.push(markdown);
         });
       }
-    }, 50);
+    };
+
+    onMounted(() => {
+      updateAnswerMarkdowns();
+    });
+
+    watch(answers, () => {
+      updateAnswerMarkdowns();
+    });
 
     return { answerMarkdowns };
   },

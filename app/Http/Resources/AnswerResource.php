@@ -16,6 +16,7 @@ class AnswerResource extends JsonResource
     {
         return[
           "id"=>$this->id,
+          "question_id"=>$this->question_id,
           "answer"=>$this->answer,
           "created_time"=>$this->created_at->format("H:i A"),
           "created_date"=>$this->created_at->format("M j, Y"),

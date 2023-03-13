@@ -8,13 +8,19 @@ export default {
         getAnswers(state) {
             return state.answers;
         },
+
+        getAnswersByQuestionId: (state) => (questionId) => {
+            return state.answers.filter(
+                (answer) => answer.question_id === questionId
+            );
+        },
     },
     mutations: {
         setAnswers(state, answers) {
             state.answers = answers;
         },
         setNewAnswer(state, newAnswer) {
-            state.answers.unshift(newAnswer);
+            state.answers.push(newAnswer);
         },
     },
 
@@ -22,7 +28,7 @@ export default {
         async fetchAllAnswers({ commit }, questionId) {
             try {
                 const response = await axios.get(
-                    `http://localhost:8000/api/answers/${questionId}`
+                    `http://localhost:8000/api/answers`
                 );
 
                 if (!response.data) {

@@ -45,8 +45,8 @@ import { computed } from "vue";
 export default {
   setup() {
     const store = useStore();
-    const route = useRoute();
-    const router = useRouter();
+    // const route = useRoute();
+    // const router = useRouter();
     const validationErrors = ref(null);
 
     const user = computed(() => {

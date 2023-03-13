@@ -1,19 +1,10 @@
 <template>
   <footer>
     <div
-      class="
-        flex flex-col
-        space-y-5
-        items-start
-        justify-evenly
-        p-10
-        bg-dark
-        text-white
-        md:flex-row md:space-y-0
-      "
+      class="flex flex-col space-y-5 items-start justify-evenly p-10 bg-dark text-white md:flex-row md:space-y-0"
     >
       <div class="">
-        <h3 class="text-center text-2xl border-b mb-5">Useful Links</h3>
+        <h3 class="text-2xl border-b mb-5 text-white">Useful Links</h3>
         <ul class="list-disc">
           <li>Terms And Conditions</li>
           <li>Privacy And Policy</li>
@@ -22,7 +13,7 @@
         </ul>
       </div>
       <div class="">
-        <h3 class="text-center text-2xl border-b mb-5">Contact Us</h3>
+        <h3 class="text-2xl border-b mb-5 text-white">Contact Us</h3>
         <ul class="list-disc">
           <li>094234123435</li>
           <li>example@gmail.com</li>
@@ -30,7 +21,7 @@
         </ul>
       </div>
       <div class="text-2xl flex flex-col justify-between w-[13%]">
-        <h3 class="text-2xl border-b mb-5">Social</h3>
+        <h3 class="text-2xl border-b mb-5 text-white">Social</h3>
         <div class="flex itemscen justify-between">
           <i class="fa-brands fa-square-facebook"></i>
           <i class="fa-brands fa-square-twitter"></i>
